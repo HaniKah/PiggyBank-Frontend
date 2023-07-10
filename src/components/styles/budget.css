@@ -1,0 +1,151 @@
+.budget_container {
+  text-align: left;
+  max-width: 320px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+.budget_category,
+.budget_date,
+.budget_amount,
+.budget_description {
+  width: 100%;
+  height: 17px;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  left: 5px;
+  display: flex;
+  position: relative;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#budget_select_category {
+  width: 300px;
+  height: 48px;
+  max-width: 100%;
+  top: 277px;
+  left: 30px;
+  border-radius: 31px;
+  border: none;
+  flex: 1;
+  padding: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: black;
+  background: #e6e6e6;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+#budget_datepick,
+#budget_description_input {
+  width: 269px;
+  height: 31px;
+  width: 90%;
+  max-width: 100%;
+  top: 277px;
+  left: 30px;
+  border-radius: 31px;
+  border: none;
+  flex: 1;
+  padding: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: black;
+  background: #e6e6e6;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+#budget_amount_option {
+  width: 269px;
+  height: 31px;
+  width: 90%;
+  max-width: 100%;
+  top: 277px;
+  left: 30px;
+  border-radius: 31px;
+  flex: 1;
+  padding: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: black;
+  background: #e6e6e6;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.budget_currency {
+  border: none;
+  padding: 8px;
+  background: #e6e6e6;
+}
+
+.budget_amountinput {
+  border: none;
+  padding: 8px;
+  width: 220px;
+  font-size: 11px;
+  font-weight: normal;
+  font-weight: 400;
+  background: #e6e6e6;
+}
+
+/* for the removing arrow in date */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  cursor: pointer;
+  background: transparent;
+  text-align: left;
+}
+
+.Add_budget {
+  width: 50%;
+  max-width: 100%;
+  margin: 20px auto;
+  background: #c80048;
+  border-radius: 31px;
+  padding: 8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 320px) {
+  .signup-container {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,68 @@
+.dash-topSpending{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+
+}
+
+
+.spending-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* border: 5px solid var( --gray-4); */
+
+    margin: auto 0;
+    border-radius: 1em;
+
+
+}
+
+.spending-box{
+text-align: left;
+margin-left: 1em;
+}
+
+.rep-tran{
+    margin: 0;
+    justify-self: left;
+    font-size: small;
+
+}
+
+.rep-total-spent{
+    flex: 2;
+    text-align: right;
+    margin-right: 1em;
+    
+}
+.rep-title{
+    margin: 0;
+    font-weight: 700;
+}
+
+/* .css-1va2uof-MuiPaper-root-MuiAccordion-root:before{
+    background-color: none;
+} */
+
+.rep-trans-accordion{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+    background-color: var(--gray-0);
+    margin: 0.5em 0;
+    border-radius: 5em;
+
+
+
+}
+
+.rep-trans-accordion p{
+margin: 0.3em;
+
+}
+.rep-trans-accordion-amount{
+    font-weight: 700;
+}
