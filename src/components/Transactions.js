@@ -4,9 +4,6 @@ import Backdrop from "@mui/material/Backdrop";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import Container from "@mui/material/Container";
-import ScanReceipt from "./svg/IconScanReciept";
-import LinkAccount from "./svg/IconPayWithCard";
-import ManualEntry from "./svg/IconManuallyEnter";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import Tabs from "@mui/material/Tabs";
@@ -15,6 +12,10 @@ import Button from "@mui/material/Button";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import { ReactComponent as Trash } from "./svgCategories/trash-icon.svg";
+import { ReactComponent as LinkAccount } from "./svgCategories/linkAccount.svg";
+import { ReactComponent as ManualEntry } from "./svgCategories/manualEntry.svg";
+import { ReactComponent as ScanReceipt } from "./svgCategories/scanHeader.svg";
+
 import DialogDeleteTransaction from "./DialogDeleteTransaction";
 
 import { useState, useEffect, useContext } from "react";
@@ -70,9 +71,9 @@ export default function Transactions() {
   };
 
   //transactions functions
-  const handleChange = (event, newValue) => {
-    setTransaction(newValue);
-  };
+  // const handleChange = (event, newValue) => {
+  //   setTransaction(newValue);
+  // };
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -84,7 +85,7 @@ export default function Transactions() {
     try {
       console.log(id);
       const response = await fetch(
-        `https://piggybank-api.onrender.com/transaction/${id}`,
+        `http://${process.env.REACT_APP_URL}/transaction/${id}`,
 
         {
           method: "DELETE",
@@ -145,6 +146,7 @@ export default function Transactions() {
       now.getDate()
     ).getTime();
     setEndDate(today);
+
     const last5Years = new Date(
       now.getFullYear() - 5,
       now.getMonth(),
@@ -230,63 +232,35 @@ export default function Transactions() {
   // }, [filter]);
 
   return (
-    <Container
-      maxWidth="sm"
-      id="transactions-container-id"
-      className="transactions-container"
-      sx={{
-        paddingTop: "100px",
-        paddingBottom: "100px",
-        maxWidth: "sm",
-        minHeight: "100vh",
-      }}
-      style={{
-        background: styling.backgroundColor,
-        paddingBottom: styling.paddingBottom,
-      }}
-    >
-      {dialogOpen ? (
-        <DialogDeleteTransaction
-          setDialogOpen={setDialogOpen}
-          tranDeleteName={tranDeleteName}
-          tranDeleteId={tranDeleteId}
-          refresh={refresh}
-          setRefresh={setRefresh}
-        />
-      ) : null}
-      <Box
-        sx={{
-          transform: "translateZ(0px)",
-          flexGrow: 1,
-          display: "flex",
-          flexDirection: "column",
-          textDecoration: "none",
-        }}
-      >
-        <Tabs
-          value={transaction}
-          onChange={handleChange}
-          centered
-          className="tabs-div"
-          sx={{ "& .MuiTabs-indicator": { display: "none" } }}
-          style={{ background: "snow" }}
-        >
-          <Tab
-            label="expenses"
-            value="expenses"
-            style={{ fontSize: "16px" }}
-            className={transaction === "expenses" ? "active tab" : "tab"}
+    <div className="General">
+      <div className="transactions-container">
+        {dialogOpen ? (
+          <DialogDeleteTransaction
+            setDialogOpen={setDialogOpen}
+            tranDeleteName={tranDeleteName}
+            tranDeleteId={tranDeleteId}
+            refresh={refresh}
+            setRefresh={setRefresh}
           />
-          <Tab
-            label="income"
-            value="income"
-            style={{ fontSize: "16px" }}
-            className={transaction === "income" ? "active tab" : "tab"}
-          />
-        </Tabs>
+        ) : null}
+
+        <div className="tabs-div">
+          <div
+            onClick={() => setTransaction("expenses")}
+            className={transaction === "expenses" ? "activeTab" : "tab"}
+          >
+            <h5 className="E">Expenses</h5>
+          </div>
+          <div
+            onClick={() => setTransaction("income")}
+            className={transaction === "income" ? "activeTab" : "tab"}
+          >
+            <h5 className="E">Income</h5>
+          </div>
+        </div>
 
         {/* Filtering by Date */}
-        <Box component="div" className="transaction-filter" sx={{ m: 2 }}>
+        {/*         <Box component="div" className="transaction-filter" sx={{ m: 2 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label" sx={{ fontSize: "12px" }}>
               Filter
@@ -329,25 +303,14 @@ export default function Transactions() {
               </MenuItem>
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
 
         {/* Expenses */}
         {transaction === "expenses" && (
-          <Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-start",
-                ml: 0.5,
-              }}
-            >
-              <Typography
-                style={{ color: styling.txtColor }}
-                sx={{ fontSize: "16px", fontWeight: "bold", mb: 1 }}
-              >
-                Spent
-              </Typography>
-            </Box>
+          <div>
+            <div>
+              <h5 style={{ color: styling.txtColor }}>Spent</h5>
+            </div>
 
             {tranData
               .filter((element) => {
@@ -422,26 +385,14 @@ export default function Transactions() {
                   </Box>
                 );
               })}
-          </Box>
+          </div>
         )}
         {/* Income */}
         {transaction === "income" && (
-          <Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "flex-start",
-                ml: 0.5,
-              }}
-            >
-              <Typography
-                style={{ color: styling.txtColor }}
-                sx={{ fontSize: "16px", fontWeight: "bold", mb: 1 }}
-              >
-                {" "}
-                Earned{" "}
-              </Typography>
-            </Box>
+          <div>
+            <div>
+              <h5 style={{ color: styling.txtColor }}>Earned</h5>
+            </div>
 
             {tranData
               .filter((element) => {
@@ -509,43 +460,34 @@ export default function Transactions() {
                   </Box>
                 );
               })}
-          </Box>
+          </div>
         )}
-      </Box>
 
-      <Backdrop open={open} />
-      <SpeedDial
-        ariaLabel="SpeedDial tooltip example"
-        style={{
-          zIndex: 5,
-          transform: "translateX(+40%)",
-        }}
-        sx={{
-          position: "sticky",
-          bottom: 70,
-          "& .MuiFab-root": {
-            width: "64px", // Increase the width
-            height: "64px", // Increase the height
-          },
-        }}
-        icon={<AddIcon sx={{ color: "#FFFF", fontSize: "30px" }} />}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        open={open}
-        FabProps={{
-          style: paperStyles,
-        }}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            tooltipOpen
-            onClick={() => handleActionClick(action.route)}
-          />
-        ))}
-      </SpeedDial>
-    </Container>
+        {/* <Backdrop open={open} /> */}
+        <div className="speedDial-wrapper">
+          <SpeedDial
+            className="speedDial"
+            ariaLabel="SpeedDial tooltip example"
+            icon={<AddIcon sx={{ color: "#FFFF", fontSize: "30px" }} />}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            open={open}
+            FabProps={{
+              style: paperStyles,
+            }}
+          >
+            {actions.map((action) => (
+              <SpeedDialAction
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                tooltipOpen
+                onClick={() => handleActionClick(action.route)}
+              />
+            ))}
+          </SpeedDial>
+        </div>
+      </div>
+    </div>
   );
 }

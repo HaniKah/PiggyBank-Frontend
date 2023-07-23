@@ -29,7 +29,12 @@ function App() {
   return (
     <div className="App">
       {token ? (
-        <div>
+        <div
+          className="Main"
+          style={{
+            background: styling.backgroundColor,
+          }}
+        >
           <Navbar />
           <Routes>
             <Route path="/" element={<Dashboard />} />

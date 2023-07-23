@@ -49,7 +49,7 @@ export default function AddExpense() {
       setIsLoading(true);
       try {
         const res = await fetch(
-          "https://piggybank-api.onrender.com/transaction/",
+          `http://${process.env.REACT_APP_URL}/transaction/`,
           {
             method: "POST",
             headers: {

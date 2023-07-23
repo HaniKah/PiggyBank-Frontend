@@ -11,7 +11,7 @@ import { ReactComponent as Cornerright } from "./svgCategories/cornerright.svg";
 import { TextField } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
-import { styled } from '@mui/system';
+import { styled } from "@mui/system";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -30,11 +30,11 @@ export default function Login() {
     console.log(`Email:${email},Password:${password}`);
 
     // const url = `${process.env.REACT_APP_BACKEND_URL}/users/login`
-    
+
     // console.log("login URL:", url)
 
     const response = await fetch(
-      "https://piggybank-api.onrender.com/users/login",
+      `http://${process.env.REACT_APP_URL}/users/login`,
       // url,
       {
         method: "POST",
@@ -50,9 +50,9 @@ export default function Login() {
     }
     if (response.ok) {
       // setTimeout(() => {
-        localStorage.setItem("token", data.token);
-        setIsLoading(false);
-        login(data.token);
+      localStorage.setItem("token", data.token);
+      setIsLoading(false);
+      login(data.token);
       // }, 5000);
     }
 
@@ -62,9 +62,9 @@ export default function Login() {
   };
 
   const CustomButton = styled(Button)({
-    '&:hover': {
-      backgroundColor: '#ffa726',
-      transform: 'scale(1.05)',
+    "&:hover": {
+      backgroundColor: "#ffa726",
+      transform: "scale(1.05)",
     },
   });
 
@@ -73,7 +73,12 @@ export default function Login() {
       <Cornerright className="cornerright" />
       {isLoading ? (
         <Box
-          sx={{ display: "flex", justifyContent: "center", padding: "20px", paddingTop: "300px", }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "20px",
+            paddingTop: "300px",
+          }}
         >
           <CircularProgress sx={{ color: "#b9b9b9" }} />
         </Box>
@@ -129,9 +134,9 @@ export default function Login() {
               }}
             ></TextField>
             <Box
-             sx={{
-              padding: "10px",
-            }}
+              sx={{
+                padding: "10px",
+              }}
             >
               <CustomButton
                 sx={{

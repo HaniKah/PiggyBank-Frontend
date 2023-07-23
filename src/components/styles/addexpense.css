@@ -1,22 +1,3 @@
-:root {
-  --red: #c80048;
-  --red2: #eb1b67;
-  --blue: #453f78;
-
-  --gray-1: #e9e9e9;
-  --gray-2: #d9d9d9;
-  --gray-3: #b9b9b9;
-
-  --header: linear-gradient(#c80048, #961c48);
-
-  /* use these predefined colors by adding .. var()
-    for example color : var(--red) */
-}
-
-/* Not necessary because navbar will be fixed
-#transactions-container-id {
-  min-height: 100%; 
-} */
 
 .css-cuefkz-MuiContainer-root {
   background-color: white;

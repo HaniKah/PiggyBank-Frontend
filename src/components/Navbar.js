@@ -19,6 +19,9 @@ import Container from "@mui/material/Container";
 import { Typography } from "@mui/material";
 import { ThemeContext } from "../context/ThemeContext";
 import { DataContext } from "../context/DataContext";
+import { ReactComponent as Scan } from "./svgCategories/scanHeader.svg";
+import { ReactComponent as IconTransportation } from "./svgCategories/transportation.svg";
+import "./styles/navbar.css";
 
 export default function Navbar() {
   const { token, logout } = useContext(AuthContext);
@@ -28,8 +31,6 @@ export default function Navbar() {
   const open = Boolean(anchorEl);
   const location = useLocation();
   const { setTranData, setBudgetData, setCategories } = useContext(DataContext);
-
-  console.log("Current route:", location.pathname);
 
   const handleClick = () => {
     localStorage.removeItem("token");
@@ -115,134 +116,93 @@ export default function Navbar() {
   };
 
   return (
-    <Container
-      style={{ maxWidth: "600px" }}
-      sx={{
-        background: "linear-gradient(#c80048, #961c48)",
-        // height: "100%",
-        padding: "20px",
-        paddingTop: "30px",
-        // display: "flex",
-        // justifyContent: "space-between",
-        alignItems: "center",
-        boxSizing: "border-box",
-        position: "fixed",
-        zIndex: 5,
-        borderRadius: "0 0 1.5em 1.5em",
-        boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.25);",
-      }}
-    >
-      <Typography
-        variant="h5"
-        gutterBottom
-        component="a"
-        style={{ justifySelf: "center", width: "100%" }}
-        sx={{
-          ml: 7,
-          fontFamily: "Inter",
-          fontWeight: 700,
-          color: "#FFFF",
-          fontSize: "20px",
+    <div className="navbar-container">
+      <div onClick={handleClick2} className="navbar-scan">
+        <Scan />
+      </div>
+      <h4 className="navbar-title">{currentPage}</h4>
 
-          // textDecoration: "none",
-          // justifySelf: "center",
-          // flex: "2",
-          // margin: "auto 0",
-        }}
-      >
-        {currentPage}
-      </Typography>
-
-      <Fragment>
-        <Box
-          style={{ float: "right" }}
-          // sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
+      <Tooltip title="Account settings">
+        <IconButton
+          onClick={handleClickAvatar}
+          size="small"
+          aria-controls={open ? "account-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
         >
-          <Tooltip title="Account settings">
-            <IconButton
-              onClick={handleClickAvatar}
-              size="small"
-              sx={{ ml: 5 }}
-              aria-controls={open ? "account-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-            >
-              <MenuIcon sx={{ width: 25, height: 25, color: "white" }} />
-            </IconButton>
-          </Tooltip>
-        </Box>
-        <Menu
-          anchorEl={anchorEl}
-          id="account-menu"
-          open={open}
-          onClose={handleClose}
-          onClick={handleClose}
-          PaperProps={{
-            elevation: 0,
-            style: paperStyles,
-            sx: {
-              overflow: "visible",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-              mt: 1.5,
-              "& .MuiAvatar-root": {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              "&:before": {
-                content: '""',
-                display: "block",
-                position: "absolute",
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: "background.paper",
-                transform: "translateY(-50%) rotate(45deg)",
-                zIndex: 0,
-              },
+          <MenuIcon sx={{ width: 25, height: 25, color: "white" }} />
+        </IconButton>
+      </Tooltip>
+
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          style: paperStyles,
+          sx: {
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            mt: 1.5,
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
             },
-          }}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-        >
-          {/* <MenuItem onClick={handleClose}>
-            <Box onClick={handleLogin} sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-              <ListItemIcon sx={{ color: '#FFFF'}}>
-                <Login />
-              </ListItemIcon>
-              <Typography
-              sx={{
-                fontFamily: 'Inter',
-                fontWeight: 700,
-                color: '#FFFF',
-                textDecoration: 'none'
-                }}>
-                  Login
-              </Typography>
-            </Box>
-          </MenuItem> */}
+            "&:before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        <MenuItem onClick={handleClose}>
+          <Box
+            onClick={handleClick}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <ListItemIcon sx={{ color: "#FFFF" }}>
+              <Logout sx={{ fontSize: "25px" }} />
+            </ListItemIcon>
 
-          {/* <MenuItem onClick={handleClose}>
-            <Box onClick={handleSignup} sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-              <ListItemIcon  sx={{ color: '#FFFF'}}>
-                <PersonAdd fontSize="small" />
-              </ListItemIcon>
-              <Typography
+            <Typography
               sx={{
-                fontFamily: 'Inter',
+                fontFamily: "Inter",
                 fontWeight: 700,
-                color: '#FFFF',
-                textDecoration: 'none'
-                }}>
-                  Signup
-              </Typography>
-            </Box>
-          </MenuItem> */}
+                color: "#FFFF",
+                textDecoration: "none",
+                fontSize: "16px",
+              }}
+            >
+              Logout
+            </Typography>
+          </Box>
+        </MenuItem>
+
+        <Divider />
+
+        {/* {token !== null && (
           <MenuItem onClick={handleClose}>
             <Box
-              onClick={handleClick}
+              onClick={handleClick2}
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -250,7 +210,7 @@ export default function Navbar() {
               }}
             >
               <ListItemIcon sx={{ color: "#FFFF" }}>
-                <Logout sx={{ fontSize: "25px" }} />
+                <Settings sx={{ fontSize: "25px" }} />
               </ListItemIcon>
 
               <Typography
@@ -262,88 +222,38 @@ export default function Navbar() {
                   fontSize: "16px",
                 }}
               >
-                Logout
+                Scan Receipt
               </Typography>
             </Box>
           </MenuItem>
-
-          <Divider />
-
-          {token !== null && (
-            <MenuItem onClick={handleClose}>
-              <Box
-                onClick={handleClick2}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  textAlign: "center",
-                }}
-              >
-                <ListItemIcon sx={{ color: "#FFFF" }}>
-                  <Settings sx={{ fontSize: "25px" }} />
-                </ListItemIcon>
-
-                <Typography
-                  sx={{
-                    fontFamily: "Inter",
-                    fontWeight: 700,
-                    color: "#FFFF",
-                    textDecoration: "none",
-                    fontSize: "16px",
-                  }}
-                >
-                  Scan Receipt
-                </Typography>
-              </Box>
-            </MenuItem>
-          )}
-          <Divider />
-          <MenuItem>
-            <Box
-              onClick={toggleTheme}
+        )}
+        <Divider /> */}
+        <MenuItem>
+          <Box
+            onClick={toggleTheme}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <ListItemIcon sx={{ color: "#FFFF" }}>
+              <DarkModeIcon sx={{ fontSize: "25px" }} />
+            </ListItemIcon>
+            <Typography
               sx={{
-                display: "flex",
-                alignItems: "center",
-                textAlign: "center",
+                fontFamily: "Inter",
+                fontWeight: 700,
+                color: "#FFFF",
+                textDecoration: "none",
+                fontSize: "16px",
               }}
             >
-              <ListItemIcon sx={{ color: "#FFFF" }}>
-                <DarkModeIcon sx={{ fontSize: "25px" }} />
-              </ListItemIcon>
-              <Typography
-                sx={{
-                  fontFamily: "Inter",
-                  fontWeight: 700,
-                  color: "#FFFF",
-                  textDecoration: "none",
-                  fontSize: "16px",
-                }}
-              >
-                {theme === "dark" ? "Light mode" : "Dark Mode"}
-              </Typography>
-            </Box>
-          </MenuItem>
-        </Menu>
-      </Fragment>
-      <Box style={{ width: "50px", justifySelf: "left" }}></Box>
-
-      {/* <div className="title">
-        <Link to="/">PiggyBank</Link>
-      </div> */}
-      {/* <nav>
-        {token !== null && (
-          <div>
-            <span style={{ padding: "10px" }}>Hello, {decodedToken?.name}</span>
-            <button onClick={handleClick}>Log out</button>
-          </div>
-        )}
-        {token === null && (
-          <div>
-            <Link to="login">Login</Link>
-            <Link to="signup">Signup</Link>
-          </div>
-        )}
-      </nav> */}
-    </Container>
+              {theme === "dark" ? "Light mode" : "Dark Mode"}
+            </Typography>
+          </Box>
+        </MenuItem>
+      </Menu>
+    </div>
   );
 }

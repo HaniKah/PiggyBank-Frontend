@@ -29,7 +29,7 @@ export default function DialogConfirm({
     try {
       console.log(tranDeleteId);
       const response = await fetch(
-        `https://piggybank-api.onrender.com/transaction/${tranDeleteId}`,
+        `http://${process.env.REACT_APP_URL}/transaction/${tranDeleteId}`,
 
         {
           method: "DELETE",

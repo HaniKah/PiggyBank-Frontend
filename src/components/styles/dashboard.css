@@ -20,6 +20,68 @@
 }
 
 
+/* =======================================
+Filters
+===================================== */
+
+.filtering-container{
+  display: flex;
+  gap: 1em;
+  align-items: center;
+
+}
+
+
+
+.direct-filter p {
+  margin: 0;
+}
+
+/* .calendar-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gray-4);
+  border-radius: 30px;
+  height: 30px;
+  width: 30px;
+} */
+
+.direct-filter{
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  flex: 1;
+  border: 1px solid var(--gray-4);
+  border-radius: 3em;
+  height: 30px;
+  padding: 0 1em;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+
+
+}
+
+
+.activemonth {
+  font-weight: 700;
+  text-decoration: underline;
+  align-self: center;
+}
+
+
+.direct-filter::-webkit-scrollbar {
+display: none;
+}
+
+
+
+
+.month{
+  cursor: pointer;
+}
+
+
 
 
 
@@ -205,19 +267,8 @@ margin-left: 0.5em;
   margin: 0;
 }
 
-.dash-graph{
-  margin-bottom: 1em;
-}
-.dash-graph h2{
-  text-align: center;
-  color: var(--black);
-  font-size: 25px;
-  margin: 0;
-}
-.dash-graph p{
-  margin: 5px;
-  font-size: 10px;
-}
+
+
 
 
 

@@ -49,19 +49,32 @@
 
 
 .App {
-  text-align: center;
-  min-width: 320px;
-  max-width: 600px;
-  min-height: 100vh;
+
+  max-width: 450px;
+  width: 100%;
+
+
   /* border: solid 1px whitesmoke; */
 
   margin: 0 auto;
-  /* margin-bottom: 90px; */
+
   /* background: linear-gradient(#1c060e, #7f173c); */
   /* padding: 1em; */
   font-family: "Inter", sans-serif;
-  position: relative;
+
+}
+.main{
+  min-height: 100vh;
+}
+.General{
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 90px;
+  padding-top: 110px;
+  min-height: 100vh;
+  height: 100%;
 
 
 
 }
+

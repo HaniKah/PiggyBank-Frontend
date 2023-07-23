@@ -1,37 +1,22 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import Backdrop from "@mui/material/Backdrop";
-import ManualEntry from "./svg/IconManuallyEnter";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { DataContext } from "../context/DataContext"; //importing datacontext
-import Button from "@mui/material/Button";
-import BudgetCard from "./BudgetCard";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import CardHeader from "@mui/material/CardHeader";
 import AddIcon from "@mui/icons-material/Add";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import CardMedia from "@mui/material/CardMedia";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+import "./styles/budget.css";
 
 import DialogConfirm from "./DialogConfirm";
 
@@ -51,6 +36,8 @@ import { ReactComponent as IconRepairs } from "./svgCategories/repairs.svg";
 import { ReactComponent as IconTransportation } from "./svgCategories/transportation.svg";
 import { ReactComponent as IconWork } from "./svgCategories/work.svg";
 import { ReactComponent as IconTrash } from "./svgCategories/trash.svg";
+import { ReactComponent as IconManualEntry } from "./svgCategories/manualEntry.svg";
+
 import { ThemeContext } from "../context/ThemeContext";
 
 const ExpandMore = styled((props) => {
@@ -86,7 +73,7 @@ export default function Budget() {
 
   const navigate = useNavigate();
   const actions = [
-    { icon: <ManualEntry />, name: "Add Budget", route: "/addbudget" },
+    { icon: <IconManualEntry />, name: "Add Budget", route: "/addbudget" },
   ];
 
   const handleActionClick = (route) => {
@@ -135,33 +122,18 @@ export default function Budget() {
   };
 
   return (
-    <Container
-      sx={{
-        paddingTop: "100px",
-      }}
-      style={{
-        background: styling.backgroundColor,
-        paddingBottom: styling.paddingBottom,
-      }}
-    >
-      {dialogOpen ? (
-        <DialogConfirm
-          setDialogOpen={setDialogOpen}
-          budgetDeleteName={budgetDeleteName}
-          budgetDeleteId={budgetDeleteId}
-          refresh={refresh}
-          setRefresh={setRefresh}
-        />
-      ) : null}
-      <Box
-        sx={{
-          height: 600,
-          transform: "translateZ(0px)",
-          flexGrow: 1,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+    <div className="General">
+      <div className="budget-container">
+        {dialogOpen ? (
+          <DialogConfirm
+            setDialogOpen={setDialogOpen}
+            budgetDeleteName={budgetDeleteName}
+            budgetDeleteId={budgetDeleteId}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        ) : null}
+
         {budgetData.length ? null : "You have not added a Budget Limit yet."}
 
         {budgetData?.map((element) => {
@@ -182,28 +154,24 @@ export default function Budget() {
           }
 
           return (
-            <Box>
-              <Card
-                sx={{
-                  minWidth: 275,
-                  mt: 1,
-                  borderRadius: "15px",
-                  display: "column",
-                }}
-                className="budget_card"
-                style={{
-                  backgroundColor: styling.backgroundBoard,
-                  border: styling.borders,
-                }}
+            <Accordion
+              style={{
+                backgroundColor: styling.backgroundBoard,
+                border: styling.borders,
+                borderRadius: "15px",
+              }}
+            >
+              <AccordionSummary
+                expandIcon={
+                  <ExpandMoreIcon
+                    sx={{
+                      color: styling.txtColor,
+                    }}
+                  />
+                }
               >
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    paddingBottom: 0,
-                  }}
-                >
-                  <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <div className="budget-wrapper-test">
+                  <div className="budget-header">
                     {(() => {
                       const Icon =
                         categoryIcons[
@@ -212,295 +180,154 @@ export default function Budget() {
                             : "others"
                         ];
 
-                      return <Icon style={{ marginRight: "0.5rem" }} />;
+                      return <Icon className="dash-icon-title" />;
                     })()}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "flex-start",
-                        width: "80%",
-                      }}
-                    >
-                      <Typography
-                        sx={{ fontSize: 16, fontWeight: "700" }}
+
+                    <div className="budget-text">
+                      <p
                         style={{ color: styling.txtColor }}
+                        className="dash-budget-title"
+
+                        // style={{ fontSize: "20px", paddingTop: "5px" }}
                       >
                         {element.category_name.replace(/^[\w]/, (c) =>
                           c.toUpperCase()
                         )}
-                      </Typography>
-                      <Typography
+                      </p>
+                      <p
                         style={{ color: styling.txtColor }}
-                        sx={{ fontSize: 14, fontWeight: "300" }}
-                        color="text.secondary"
-                        gutterBottom
+                        className="dash-budget-info"
                       >
-                        {/* Budget {element.limit_amount}€/Month */}
-                        {console.log(categoriesObj)}
                         {categoriesObj[element.category_name]
                           ? Number(element.limit_amount) -
                             categoriesObj[element.category_name].spent
-                          : Number(element.limit_amount)}{" "}
-                        € remaining
-                      </Typography>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        alignItems: "flex-start",
-                        width: "20%",
+                          : Number(element.limit_amount)}
+                        € Remaining
+                      </p>
+                    </div>
+                    <IconTrash
+                      className="budget-iconTrash"
+                      style={{ fill: styling.txtColor }}
+                      onClick={() => {
+                        setBudgetDeleteName(element.category_name);
+                        setBudgetDeleteId(element._id);
+                        setDialogOpen(true);
                       }}
-                    >
-                      <Button
-                        style={{ color: styling.txtColor }}
-                        sx={{ p: 1 }}
-                        onClick={() => {
-                          setBudgetDeleteName(element.category_name);
-                          setBudgetDeleteId(element._id);
-                          setDialogOpen(true);
-                        }}
-                      >
-                        <IconTrash
-                          style={{
-                            width: "20px",
-                            height: "20px",
-                            fill: styling.txtColor,
-                          }}
-                        />
-                      </Button>
-                    </Box>
-                  </Box>
+                    />
+                  </div>
                   <div className="linear-progress-container2">
-                    <h6
-                      className="progress-left"
+                    <p
                       style={
                         (categoriesObj[element.category_name]?.spent * 100) /
                           categoriesObj[element.category_name]?.limit >
                         10
-                          ? { fontSize: "14px", color: "white" }
-                          : { fontSize: "14px", color: "black" }
+                          ? { color: "white" }
+                          : { color: "black" }
                       }
+                      className="progress-left"
                     >
                       {categoriesObj?.hasOwnProperty(element.category_name)
-                        ? `${categoriesObj[element.category_name].spent} €`
-                        : "0 €"}
-                    </h6>
-                    <span
-                      className="progress-right"
+                        ? `${categoriesObj[element.category_name].spent} $`
+                        : "0 $"}
+                    </p>
+                    <p
                       style={
                         (categoriesObj[element.category_name]?.spent * 100) /
                           categoriesObj[element.category_name]?.limit >
                         90
-                          ? { fontSize: "14px", color: "white" }
-                          : { fontSize: "14px", color: "black" }
+                          ? { color: "white" }
+                          : { color: "black" }
                       }
+                      className="progress-right"
                     >
                       {element.limit_amount} €
-                    </span>
+                    </p>
                     <LinearProgress
                       variant="determinate"
-                      // value={categoriesObj[element.category_name] ? 90 : 20}
                       value={spentBudgetBar}
                     />
                   </div>
-                  <Accordion
-                    expanded={expanded === element.category_name}
-                    onChange={handleChange(element.category_name)}
-                    sx={{ boxShadow: "none" }}
-                  >
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1bh-content"
-                      id="panel1bh-header"
-                    ></AccordionSummary>
-                    <AccordionDetails>
-                      {tranData
-                        .filter(
-                          (item) =>
-                            item.tran_sign === "DR" &&
-                            item.category_name === element.category_name
-                        )
-                        .sort(
-                          (a, b) =>
-                            new Date(b.tran_date) - new Date(a.tran_date)
-                        )
-                        .slice(0, 10)
-                        .map((element) => {
-                          const origDate = element.tran_date;
-                          const newDate = new Date(origDate);
-                          const newLocalDate = newDate
-                            .toLocaleDateString("en-GB")
-                            .replace(/[/]/g, ".");
+                </div>
+              </AccordionSummary>
+              <AccordionDetails>
+                {tranData
+                  .filter(
+                    (item) =>
+                      item.tran_sign === "DR" &&
+                      item.category_name === element.category_name
+                  )
+                  .sort((a, b) => new Date(b.tran_date) - new Date(a.tran_date))
+                  .slice(0, 10)
+                  .map((element) => {
+                    const origDate = element.tran_date;
+                    const newDate = new Date(origDate);
+                    const newLocalDate = newDate
+                      .toLocaleDateString("en-GB")
+                      .replace(/[/]/g, ".");
 
-                          const capitalizedDesc =
-                            element.tran_description.replace(/./, (c) =>
-                              c.toUpperCase()
-                            );
-                          return (
-                            <Box
-                              component="div"
-                              className="transaction-div"
-                              key={element._id}
-                              sx={{
-                                display: "flex",
-                                justifyContent: "space-around",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Typography
-                                variant="p"
-                                component="p"
-                                className="transaction-item"
-                                sx={{ fontWeight: "bold" }}
-                              >
-                                {USDollar.format(element.tran_amount)}
-                              </Typography>
-                              <Typography
-                                variant="p"
-                                component="p"
-                                className="transaction-item"
-                              >
-                                {capitalizedDesc}
-                              </Typography>
-                              <Typography
-                                variant="p"
-                                component="p"
-                                className="transaction-item"
-                              >
-                                {newLocalDate}
-                              </Typography>
-                            </Box>
-                          );
-                        })}
-                    </AccordionDetails>
-                  </Accordion>
-                  {/* <CardActions disableSpacing sx={{ p: 0 }}>
-          <ExpandMore
-            expand={
-              expandedCat === element.category_name ? true : false
-            }
-            onClick={() => setExpandedCat(element.category_name)}
-            aria-expanded={
-              expandedCat === element.category_name ? true : false
-            }
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
-        </CardActions>
-        <Collapse
-          in={expandedCat === element.category_name ? true : false}
-          timeout="auto"
-          unmountOnExit
-        >
-          <CardContent sx={{ p: 0 }}>
-            {tranData
-              .filter(
-                (item) =>
-                  item.tran_sign === "DR" &&
-                  item.category_name === element.category_name
-              )
-              .sort(
-                (a, b) => new Date(b.tran_date) - new Date(a.tran_date)
-              )
-              .slice(0, 10)
-              .map((element) => {
-                const origDate = element.tran_date;
-                const newDate = new Date(origDate);
-                const newLocalDate = newDate
-                  .toLocaleDateString("en-GB")
-                  .replace(/[/]/g, ".");
-
-                const capitalizedDesc =
-                  element.tran_description.replace(/./, (c) =>
-                    c.toUpperCase()
-                  );
-                return (
-                  <Box
-                    component="div"
-                    className="transaction-div"
-                    key={element._id}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      {USDollar.format(element.tran_amount)}
-                    </Typography>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                    >
-                      {capitalizedDesc}
-                    </Typography>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                    >
-                      {newLocalDate}
-                    </Typography>
-                  </Box>
-                );
-              })}
-          </CardContent>
-        </Collapse> */}
-                </CardContent>
-              </Card>
-            </Box>
+                    const capitalizedDesc = element.tran_description.replace(
+                      /./,
+                      (c) => c.toUpperCase()
+                    );
+                    return (
+                      <div className="transaction-div" key={element._id}>
+                        <Typography
+                          variant="p"
+                          component="p"
+                          className="transaction-item"
+                          sx={{ fontWeight: "bold" }}
+                        >
+                          {USDollar.format(element.tran_amount)}
+                        </Typography>
+                        <Typography
+                          variant="p"
+                          component="p"
+                          className="transaction-item"
+                        >
+                          {capitalizedDesc}
+                        </Typography>
+                        <Typography
+                          variant="p"
+                          component="p"
+                          className="transaction-item"
+                        >
+                          {newLocalDate}
+                        </Typography>
+                      </div>
+                    );
+                  })}
+              </AccordionDetails>
+            </Accordion>
           );
         })}
-        <Backdrop open={open} />
-        <SpeedDial
-          ariaLabel="SpeedDial tooltip example"
-          style={{
-            zIndex: 5,
-            transform: "translateX(+40%)",
-          }}
-          sx={{
-            position: "sticky",
-            bottom: 70,
-            "& .MuiFab-root": {
-              width: "64px", // Increase the width
-              height: "64px", // Increase the height
-            },
-          }}
-          // icon={<SpeedDialIcon sx={{ color: "#FFFF"}} />}
-          icon={<AddIcon sx={{ color: "#FFFF", fontSize: "30px" }} />}
-          onClose={() => {
-            setOpen(false);
-          }}
-          onOpen={() => {
-            setOpen(true);
-          }}
-          open={open}
-          FabProps={{
-            style: paperStyles,
-          }}
-        >
-          {actions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              tooltipOpen
-              onClick={() => handleActionClick(action.route)}
-            />
-          ))}
-        </SpeedDial>
-      </Box>
-    </Container>
+        <div className="speedDial-wrapper">
+          <SpeedDial
+            className="speedDial"
+            ariaLabel="SpeedDial tooltip example"
+            icon={<AddIcon style={{ color: "#FFFF", fontSize: "30px" }} />}
+            onClose={() => {
+              setOpen(false);
+            }}
+            onOpen={() => {
+              setOpen(true);
+            }}
+            open={open}
+            FabProps={{
+              style: paperStyles,
+            }}
+          >
+            {actions.map((action) => (
+              <SpeedDialAction
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                tooltipOpen
+                onClick={() => handleActionClick(action.route)}
+              />
+            ))}
+          </SpeedDial>
+        </div>
+      </div>
+    </div>
   );
 }
