@@ -1,3 +1,4 @@
+
 .empty-msg{
 width: 100%;
 text-align: center;
@@ -17,11 +18,12 @@ padding: 1em;
     border-radius: 1em;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
 }
-.top-spending-title{
-    font-size: 18px;
-}
+
 
 .empty-btn:hover{
     background-color: var(--red);
@@ -43,3 +45,20 @@ padding: 1em;
     transform: scale(1.02);
     transition: all 0.3s ease
   }
+
+  .dash-graph{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .dash-graph h2{
+    text-align: center;
+    color: var(--black);
+    font-size: 25px;
+    margin: 0;
+  }
+
+  .dash-graph p{
+    font-size: 14px;
+}
+  

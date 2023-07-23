@@ -15,8 +15,8 @@ import "./styles/charts.css";
 
 import { Link } from "react-router-dom";
 
-export default function Charts() {
-  const { categories } = useContext(DataContext);
+export default function Charts({ filteredCategories }) {
+  // const { categories } = useContext(DataContext);
   const { styling, theme } = useContext(ThemeContext);
 
   const COLORS = [
@@ -59,7 +59,7 @@ export default function Charts() {
     );
   };
 
-  if (categories.length < 1) {
+  if (filteredCategories.length < 1) {
     return (
       <div
         style={{
@@ -96,8 +96,8 @@ export default function Charts() {
       >
         <div className="dash-graph">
           <h2 style={{ color: styling.txtColor }}>Spendings</h2>
-          <p style={{ color: styling.txtColor }} className="top-spending-title">
-            Top spending :{categories[0]?.name}
+          <p style={{ color: styling.txtColor }}>
+            Top spending :{filteredCategories[0]?.name}
           </p>
         </div>
 
@@ -113,7 +113,7 @@ export default function Charts() {
             />
 
             <Pie
-              data={categories}
+              data={filteredCategories}
               cx="50%"
               cy="50%"
               labelLine={true}
@@ -125,7 +125,7 @@ export default function Charts() {
               paddingAngle={1}
               legendType="circle"
             >
-              {categories?.map((entry, index) => (
+              {filteredCategories?.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}

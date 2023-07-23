@@ -37,7 +37,7 @@ export default function Signup() {
     setIsLoading(true);
 
     const response = await fetch(
-      "https://piggybank-api.onrender.com/users/signup",
+      `http://${process.env.REACT_APP_URL}/users/signup`,
       // `${process.env.REACT_APP_BACKEND_URL}/users/signup`,
       {
         method: "POST",

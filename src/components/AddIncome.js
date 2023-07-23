@@ -52,7 +52,7 @@ export default function AddIncome() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "https://piggybank-api.onrender.com/Transaction",
+          `http://${process.env.REACT_APP_URL}/transaction`,
           {
             method: "POST",
             headers: {
@@ -67,7 +67,6 @@ export default function AddIncome() {
               tran_sign: "CR", //DR (income) or CR(expense)
               tran_currency: "US",
               tran_date,
-              user,
             }),
           }
         );

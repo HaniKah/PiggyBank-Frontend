@@ -25,7 +25,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Box } from "plaid-threads";
+import { div } from "plaid-threads";
 export default function Reports() {
   const { categories, tranData } = useContext(DataContext);
   const { styling } = useContext(ThemeContext);
@@ -48,17 +48,7 @@ export default function Reports() {
     others: IconOthers,
   };
   return (
-    <Container
-      sx={{
-        paddingTop: "100px",
-        maxWidth: "sm",
-        minHeight: "100vh",
-      }}
-      style={{
-        background: styling.backgroundColor,
-        paddingBottom: "100px",
-      }}
-    >
+    <div className="General">
       <div className="dash-topSpending">
         {categories?.map((category) => {
           const IconComponent = categoryIcons[category.name]
@@ -69,8 +59,6 @@ export default function Reports() {
               sx={{
                 width: "100%",
                 borderRadius: "15px",
-                alignItems: "center",
-                border: "1px solid var( --gray-3);",
               }}
               style={{
                 backgroundColor: styling.backgroundBoard,
@@ -78,13 +66,11 @@ export default function Reports() {
               }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
+                expandIcon={<ExpandMoreIcon sx={{ color: styling.txtColor }} />}
               >
                 <div className="spending-container">
                   <IconComponent />
-                  <Box className="spending-box">
+                  <div className="spending-div">
                     <p
                       className="rep-title"
                       style={{ color: styling.txtColor }}
@@ -97,7 +83,7 @@ export default function Reports() {
                         ? "Transactions"
                         : "Transaction"}
                     </p>
-                  </Box>
+                  </div>
                   <span
                     className="rep-total-spent"
                     style={{ color: styling.txtColor }}
@@ -127,6 +113,6 @@ export default function Reports() {
           );
         })}
       </div>
-    </Container>
+    </div>
   );
 }

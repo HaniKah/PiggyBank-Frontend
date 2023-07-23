@@ -54,46 +54,32 @@ export default function Addbudget() {
       setIsLoading(true);
       try {
         //Get existing budgets
-        const res = await fetch(
-          `https://piggybank-api.onrender.com/users/${decodedToken._id}`,
-          {
-            method: "GET", // Fetch the current data first
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(`http://${process.env.REACT_APP_URL}/budget`, {
+          method: "GET", // Fetch the current data first
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
         const data = await res.json();
         const currentBudgets = data || []; // Get the current budgets array
 
-        const budgets = [
-          ...currentBudgets,
-          {
-            category_name: category,
-            budget_description: description,
-            budget_date: date,
-            limit_amount: amount,
-          },
-        ];
         // Append the new object to the existing array
 
         const resPut = await fetch(
-          `https://piggybank-api.onrender.com/users/${decodedToken._id}`,
+          `http://${process.env.REACT_APP_URL}/budget`,
           {
-            method: "PUT",
+            method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              budgets,
-              // budgets: {
-              //   category_name: category,
-              //   budget_description: description,
-              //   budget_date: date,
-              //   limit_amount: amount,
-              // },
+              category_name: category,
+              budget_description: description,
+              budget_date: date,
+              limit_amount: amount,
+              user: "",
             }),
           }
         );

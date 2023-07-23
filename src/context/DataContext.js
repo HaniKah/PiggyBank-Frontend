@@ -15,21 +15,21 @@ export default function DataContextProvider(props) {
 
   const { token } = useContext(AuthContext);
   const { decodedToken } = useJwt(token);
-  console.log("token", token);
+  /*   console.log("token", token);
   console.log("decodedToken:", decodedToken);
   console.log("_id:", decodedToken?._id);
-  console.log("refresh data?", refresh);
+  console.log("refresh data?", refresh); */
 
   // =============================
   // Fetching Data
   // ============================
-  const timeperiod = "all";
+
   useEffect(() => {
     // getting all transactions for one user within specific period
     const getData = async function () {
       try {
         const res = await fetch(
-          `https://piggybank-api.onrender.com/transaction?timeperiod=all`,
+          `http://${process.env.REACT_APP_URL}/transaction`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ export default function DataContextProvider(props) {
         Array.isArray(data) ? setTranData(data) : console.log(data);
         // setLoading(false)
       } catch (error) {
-        console.log(error);
+        /* console.log(error); */
         // setLoading(false);
       }
     };
@@ -49,7 +49,7 @@ export default function DataContextProvider(props) {
     if (token) {
       getData();
     }
-  }, [token, timeperiod, refresh]);
+  }, [token, refresh]);
 
   useEffect(() => {
     // getting all budgets for one user
@@ -57,33 +57,38 @@ export default function DataContextProvider(props) {
       try {
         const res = await fetch(
           // `http://localhost:8080/users/${decodedToken._id}`
-          `https://piggybank-api.onrender.com/users/${decodedToken._id}`
+          `http://${process.env.REACT_APP_URL}/budget`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const data = await res.json();
-        console.log("###budget data", data);
 
-        Array.isArray(data) ? setBudgetData(data) : console.log(data);
+        Array.isArray(data)
+          ? setBudgetData(data)
+          : console.log("budget Data", data);
         // setBudgetData(data);
         // setLoading(false)
       } catch (error) {
-        console.log(error);
+        /*         console.log(error);
+         */
         // setLoading(false);
       }
     };
     if (decodedToken) getBudget();
   }, [decodedToken, refresh]);
 
-  // console.log("transaction data in data Context :", tranData);
-
+  // ==================================
+  // Refactoring Data into categories
+  // ==================================
   useEffect(() => {
-    // ==================================
-    // Refactoring Data into categories
-    // ==================================
     if (tranData.length > 0) {
       const refactorData = function () {
         const debitTrans = tranData.filter((trans) => trans.tran_sign === "DR");
-        console.log("refactoring data / trandebit", debitTrans);
-        const groupedObjects = debitTrans.reduce((result, obj) => {
+        /*         console.log("refactoring data / trandebit", debitTrans);
+         */ const groupedObjects = debitTrans.reduce((result, obj) => {
           const { category_name, tran_amount } = obj;
           if (!result[category_name]) {
             result[category_name] = {
@@ -103,7 +108,6 @@ export default function DataContextProvider(props) {
             groupedObjects[budget.category_name].limit = Number(
               budget.limit_amount
             );
-            console.log(groupedObjects[budget.category_name]);
           }
         });
 
@@ -119,8 +123,8 @@ export default function DataContextProvider(props) {
     }
   }, [tranData, budgetData]);
 
-  console.log("transaction data:", tranData);
-  console.log("Budget data:", budgetData);
+  /*   console.log("transaction data:", tranData);
+  console.log("Budget data:", budgetData); */
   //   console.log("decoded token id:", decodedToken);
 
   return (
