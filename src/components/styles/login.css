@@ -1,13 +1,3 @@
-:root {
-  --red: #c80048;
-  --blue: #453f78;
-
-  --gray-1: #e9e9e9;
-  --gray-2: #d9d9d9;
-  --gray-3: #b9b9b9;
-
-  --header: linear-gradient(#c80048, #961c48);
-}
 
 .backtosignup {
   display: flex;
@@ -25,6 +15,70 @@
 .backtosignup:hover {
   transform: scale(1.1);
 }
-.css-q9651n-MuiButtonBase-root-MuiButton-root {
+
+
+.login-title{
+  color: var(--red);
+  font-weight: bold;
+}
+
+.login{
+  width: 150px;
+  height: 35px;
+  background-color: var(--red);
+  border: none;
+  border-radius: 15rem;
   color: white;
+  cursor: pointer;
+}
+
+.login:hover{
+  background-color: white;
+  color:var(--red);
+  border: 1px solid var(--red);
+  transition: all ease 0.3s;
+}
+.bank{
+  color: black;
+}
+.logo-title-login{
+  color:var(--red);
+  font-size: 35px;
+  margin: 0;
+}
+.error{
+  margin: 1.5em;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 189, 189);
+  padding: .7em;
+  border-radius: 5px;
+
+}
+
+.spinner-div{
+  /* background: url("../svgCategories/Background\ main.png"); */
+  background:var(--bg-main);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+}
+.spinner{
+  width: 30%;
+  filter: saturate(0) brightness(100);
+
+
+}
+
+.loading-txt{
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: white;
+  margin: 0;
+
 }

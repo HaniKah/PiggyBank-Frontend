@@ -1,26 +1,24 @@
+
+
 .mainMenu-container{
     display: flex;
     justify-content: space-between;
-    padding: 1em;
+    padding: 1em 1.5em;
     position: fixed;
     z-index: 5;
-
-    background: white ;
-
     box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.25);
+    background: var(--header);
     max-width: 450px;
     margin: auto 0;
     width: 100%;
     bottom: 0;
-
-    border: 1px solid var(--gray-2);
 
 
 }
 
 .menu-icon{
     cursor: pointer;
-    color: var(--gray-4) ;
+    color:white ;
 
 
 }

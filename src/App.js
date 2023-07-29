@@ -56,8 +56,8 @@ function App() {
         </div>
       ) : (
         <Routes>
-          <Route path="/" element={<Landingpage />} />
-          <Route path="/entrypage" element={<LandingPage2 />} />
+          {/* <Route path="/" element={<Landingpage />} /> */}
+          <Route path="/" element={<LandingPage2 />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {/* <Route path="*" element={<Navigate to="/" />} /> */}

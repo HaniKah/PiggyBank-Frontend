@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import loadingSpinner from "./svgCategories/loadingSpinner.gif";
 import { ReactComponent as Cornerleft } from "./svgCategories/cornerleft.svg";
 import { ReactComponent as Cornerright } from "./svgCategories/cornerright.svg";
+
 import { TextField } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
@@ -70,18 +72,11 @@ export default function Login() {
 
   return (
     <Container maxWidth="sm">
-      <Cornerright className="cornerright" />
       {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "20px",
-            paddingTop: "300px",
-          }}
-        >
-          <CircularProgress sx={{ color: "#b9b9b9" }} />
-        </Box>
+        <div className="spinner-div">
+          <img className="spinner" src={loadingSpinner} alt="spinner" />
+          <h5 className="loading-txt">Loading ...</h5>
+        </div>
       ) : (
         <Box
           sx={{
@@ -94,6 +89,11 @@ export default function Login() {
             paddingTop: "50px",
           }}
         >
+          <div className="logo-container">
+            <h1 className="logo-title-login">
+              Piggy<span className="bank">Bank</span>
+            </h1>
+          </div>
           <FormControl fullWidth className="login-container">
             <TextField
               id="login-emailinput"
@@ -135,37 +135,21 @@ export default function Login() {
             ></TextField>
             <Box
               sx={{
-                padding: "10px",
+                padding: "20px",
               }}
             >
-              <CustomButton
-                sx={{
-                  ":hover": { bgcolor: "#C42B0A" },
-                  borderRadius: "31px",
-                  background: "#c80048",
-                  width: "150px",
-                  height: "50px",
-                  margin: "20px",
-                  color: "white",
-                  fontSize: "16px",
-                  padding: "5px 50px",
-                }}
-                onClick={handleSubmit}
-                className="login"
-              >
-                Login
-              </CustomButton>
+              <button onClick={handleSubmit} className="login">
+                Sign in
+              </button>
+              <p>Don't have an account?</p>
+              <NavLink to="/signup" className="backtosignup">
+                Signup here
+              </NavLink>
+              {error && <div className="error">⚠ {error}</div>}
             </Box>
           </FormControl>
-
-          <p>Don't have an account?</p>
-          <NavLink to="/signup" className="backtosignup">
-            Signup here
-          </NavLink>
-          {error && <div className="error">{error}</div>}
         </Box>
       )}
-      <Cornerleft className="cornerleft" />
     </Container>
   );
 }

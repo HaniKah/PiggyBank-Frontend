@@ -180,9 +180,6 @@
 
 
 .speedDial-wrapper{
-
-
-
   position: fixed;
   z-index: 5;
   max-width: 450px;
@@ -203,4 +200,16 @@ bottom:10px
   flex-direction: column;
   gap: 1em;
   width: 100%;
+}
+
+.budget-transaction-div{
+  background-color: var(--gray-1);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3em 1em;
+  border-radius: 5rem;
+
+}
+.budget-transaction-info{
+  margin: 0;
 }

@@ -1,31 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Backdrop from "@mui/material/Backdrop";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import Container from "@mui/material/Container";
-import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
-import Tabs from "@mui/material/Tabs";
-import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import DialogDeleteTransaction from "./DialogDeleteTransaction";
 
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import { ReactComponent as Trash } from "./svgCategories/trash-icon.svg";
 import { ReactComponent as LinkAccount } from "./svgCategories/linkAccount.svg";
 import { ReactComponent as ManualEntry } from "./svgCategories/manualEntry.svg";
 import { ReactComponent as ScanReceipt } from "./svgCategories/scanHeader.svg";
 
-import DialogDeleteTransaction from "./DialogDeleteTransaction";
-
 import { useState, useEffect, useContext } from "react";
-import { MenuItem, InputLabel, Alert, OutlinedInput } from "@mui/material";
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import { ThemeContext } from "../context/ThemeContext";
 import "./styles/transactions.css";
-import AddIcon from "@mui/icons-material/Add";
-import { Padding } from "@mui/icons-material";
+import FilterBar from "./FilterBar";
 
 const actions = [
   { icon: <LinkAccount />, name: "Link", route: "/link" },
@@ -33,9 +22,6 @@ const actions = [
   { icon: <ManualEntry />, name: "Income", route: "/addincome" },
   { icon: <ScanReceipt />, name: "Scan", route: "/scan" },
 ];
-
-//Date Filtering in Transaction Component
-//Modal? OPTIONAL
 
 export default function Transactions() {
   //state
@@ -78,8 +64,9 @@ export default function Transactions() {
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
-
+  // ===================================
   // delete transactions
+  // ==================================
 
   const handleDeleteTransaction = async (id) => {
     try {
@@ -118,11 +105,6 @@ export default function Transactions() {
     size: "large",
   };
 
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     setIsLoading(true);
-  //     setError(null);
-
   //Currency Format
   let USDollar = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -137,102 +119,23 @@ export default function Transactions() {
     currency: "GBP",
   });
 
-  //useEffect for Date Filtering
-  useEffect(() => {
-    const now = new Date();
-    const today = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    ).getTime();
-    setEndDate(today);
-
-    const last5Years = new Date(
-      now.getFullYear() - 5,
-      now.getMonth(),
-      now.getDate()
-    ).getTime();
-    setStartDate(last5Years);
-  }, []);
-
-  useEffect(() => {
-    const now = new Date();
-    if (filter === "week") {
-      const lastWeek = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate() - 7
-      ).getTime();
-      setStartDate(lastWeek);
-    }
-    if (filter === "month") {
-      const lastMonth = new Date(
-        now.getFullYear(),
-        now.getMonth() - 1,
-        now.getDate()
-      ).getTime();
-      setStartDate(lastMonth);
-    }
-    if (filter === "3months") {
-      const last3Months = new Date(
-        now.getFullYear(),
-        now.getMonth() - 3,
-        now.getDate()
-      ).getTime();
-      setStartDate(last3Months);
-    }
-    if (filter === "6months") {
-      const last6Months = new Date(
-        now.getFullYear(),
-        now.getMonth() - 6,
-        now.getDate()
-      ).getTime();
-      setStartDate(last6Months);
-    }
-    if (filter === "year") {
-      const lastYear = new Date(
-        now.getFullYear() - 1,
-        now.getMonth(),
-        now.getDate()
-      ).getTime();
-      setStartDate(lastYear);
-    }
-    if (filter === "all") {
-      const last5Years = new Date(
-        now.getFullYear() - 5,
-        now.getMonth(),
-        now.getDate()
-      ).getTime();
-      setStartDate(last5Years);
-    }
-  }, [filter]);
-
-  // useEffect(() => {
-  //   //Logic for the filtering, probably a new fetch to get the filtered array from the backend
-  //   const getData = async function () {
-  //     try {
-  //       const res = await fetch(
-  //         `https://piggybank-api.onrender.com/transaction?timeperiod=${filter}`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-
-  //       const data = await res.json();
-  //       setTranData(data);
-  //       // setLoading(false)
-  //     } catch (error) {
-  //       console.log(error);
-  //       // setLoading(false);
-  //     }
-  //   };
-  //   getData();
-  // }, [filter]);
-
   return (
     <div className="General">
+      <FilterBar />
+      <div className="tabs-div">
+        <div
+          onClick={() => setTransaction("expenses")}
+          className={transaction === "expenses" ? "activeTab" : "tab"}
+        >
+          <h5 className="E">Expenses</h5>
+        </div>
+        <div
+          onClick={() => setTransaction("income")}
+          className={transaction === "income" ? "activeTab" : "tab"}
+        >
+          <h5 className="E">Income</h5>
+        </div>
+      </div>
       <div className="transactions-container">
         {dialogOpen ? (
           <DialogDeleteTransaction
@@ -244,73 +147,10 @@ export default function Transactions() {
           />
         ) : null}
 
-        <div className="tabs-div">
-          <div
-            onClick={() => setTransaction("expenses")}
-            className={transaction === "expenses" ? "activeTab" : "tab"}
-          >
-            <h5 className="E">Expenses</h5>
-          </div>
-          <div
-            onClick={() => setTransaction("income")}
-            className={transaction === "income" ? "activeTab" : "tab"}
-          >
-            <h5 className="E">Income</h5>
-          </div>
-        </div>
-
-        {/* Filtering by Date */}
-        {/*         <Box component="div" className="transaction-filter" sx={{ m: 2 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" sx={{ fontSize: "12px" }}>
-              Filter
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={filter}
-              label="Filter"
-              onChange={(e) => setFilter(e.target.value)}
-              sx={{
-                textAlign: "left",
-                "& fieldset": {
-                  borderRadius: "31px",
-                },
-                fontSize: "14px",
-              }}
-              style={{
-                backgroundColor: styling.backgroundBoard,
-                borderRadius: "31px",
-              }}
-            >
-              <MenuItem value={"all"} sx={{ fontSize: "14px" }}>
-                All
-              </MenuItem>
-              <MenuItem value={"week"} sx={{ fontSize: "14px" }}>
-                Last Week
-              </MenuItem>
-              <MenuItem value={"month"} sx={{ fontSize: "14px" }}>
-                Last Month
-              </MenuItem>
-              <MenuItem value={"3months"} sx={{ fontSize: "14px" }}>
-                Last 3 Months
-              </MenuItem>
-              <MenuItem value={"6months"} sx={{ fontSize: "14px" }}>
-                Last 6 Months
-              </MenuItem>
-              <MenuItem value={"year"} sx={{ fontSize: "14px" }}>
-                Last Year
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </Box> */}
-
         {/* Expenses */}
         {transaction === "expenses" && (
           <div>
-            <div>
-              <h5 style={{ color: styling.txtColor }}>Spent</h5>
-            </div>
+            <h5 style={{ color: styling.txtColor }}>Spent</h5>
 
             {tranData
               .filter((element) => {
@@ -338,51 +178,28 @@ export default function Transactions() {
                 }
 
                 return (
-                  <Box
-                    component="div"
-                    className="transaction-div"
-                    key={element._id}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                    }}
-                    style={{ backgroundColor: " var(--gray-0)" }}
-                  >
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                      sx={{ fontWeight: "bold" }}
+                  <div className="transactionsAll">
+                    <div
+                      className="transaction-div"
+                      key={element._id}
+                      style={{ backgroundColor: " var(--gray-0)" }}
                     >
-                      {euro.format(element.tran_amount)}
-                    </Typography>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                    >
-                      {capitalizedDesc}
-                    </Typography>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                    >
-                      {newLocalDate}
-                    </Typography>
-                    <Button
-                      sx={{ p: 1 }}
-                      onClick={() => {
-                        setDialogOpen(true);
-                        setTranDeleteName(element.tran_description);
-                        setTranDeleteId(element._id);
-                      }}
-                      // handleDeleteTransaction(element._id)}
-                    >
-                      <Trash style={{ width: "20px", height: "20px" }} />
-                    </Button>
-                  </Box>
+                      <p className="transaction-item">
+                        {euro.format(element.tran_amount)}
+                      </p>
+                      <p className="transaction-item">{capitalizedDesc}</p>
+                      <p className="transaction-item">{newLocalDate}</p>
+
+                      <Trash
+                        onClick={() => {
+                          setDialogOpen(true);
+                          setTranDeleteName(element.tran_description);
+                          setTranDeleteId(element._id);
+                        }}
+                        style={{ width: "20px", height: "20px" }}
+                      />
+                    </div>
+                  </div>
                 );
               })}
           </div>
@@ -390,9 +207,7 @@ export default function Transactions() {
         {/* Income */}
         {transaction === "income" && (
           <div>
-            <div>
-              <h5 style={{ color: styling.txtColor }}>Earned</h5>
-            </div>
+            <h5 style={{ color: styling.txtColor }}>Earned</h5>
 
             {tranData
               .filter((element) => {
@@ -418,46 +233,24 @@ export default function Transactions() {
                   (c) => c.toUpperCase()
                 );
                 return (
-                  <Box
-                    component="div"
-                    className="transaction-div"
-                    key={element._id}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      alignItems: "center",
-                    }}
-                    style={{ backgroundColor: " var(--gray-0)" }}
-                  >
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                      sx={{ fontWeight: "bold" }}
+                  <div className="transactionsAll">
+                    <div
+                      className="transaction-div"
+                      key={element._id}
+                      style={{ backgroundColor: " var(--gray-0)" }}
                     >
-                      {euro.format(element.tran_amount)}
-                    </Typography>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                    >
-                      {capitalizedDesc}
-                    </Typography>
-                    <Typography
-                      variant="p"
-                      component="p"
-                      className="transaction-item"
-                    >
-                      {newLocalDate}
-                    </Typography>
-                    <Button
-                      sx={{ p: 1 }}
-                      onClick={() => handleDeleteTransaction(element._id)}
-                    >
-                      <Trash style={{ width: "20px", height: "20px" }} />
-                    </Button>
-                  </Box>
+                      <p className="transaction-item">
+                        {euro.format(element.tran_amount)}
+                      </p>
+                      <p className="transaction-item">{capitalizedDesc}</p>
+                      <p className="transaction-item">{newLocalDate}</p>
+
+                      <Trash
+                        onClick={() => handleDeleteTransaction(element._id)}
+                        style={{ width: "20px", height: "20px" }}
+                      />
+                    </div>
+                  </div>
                 );
               })}
           </div>

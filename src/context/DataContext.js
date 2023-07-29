@@ -9,27 +9,21 @@ export default function DataContextProvider(props) {
   const [budgetData, setBudgetData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const [timePeriod, setTimePeriod] = useState("");
-
   const [categoriesObj, setCategoriesObj] = useState({});
-
+  const today = new Date();
+  const [activeFilter, setActiveFilter] = useState(today.getMonth());
   const { token } = useContext(AuthContext);
   const { decodedToken } = useJwt(token);
-  /*   console.log("token", token);
-  console.log("decodedToken:", decodedToken);
-  console.log("_id:", decodedToken?._id);
-  console.log("refresh data?", refresh); */
 
   // =============================
-  // Fetching Data
+  // Fetching Transaction Data
   // ============================
-
   useEffect(() => {
     // getting all transactions for one user within specific period
     const getData = async function () {
       try {
         const res = await fetch(
-          `http://${process.env.REACT_APP_URL}/transaction`,
+          `http://${process.env.REACT_APP_URL}/transaction?timeperiod=${activeFilter}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -39,25 +33,26 @@ export default function DataContextProvider(props) {
 
         const data = await res.json();
         Array.isArray(data) ? setTranData(data) : console.log(data);
-        // setLoading(false)
       } catch (error) {
-        /* console.log(error); */
-        // setLoading(false);
+        console.log(error);
       }
     };
 
     if (token) {
       getData();
     }
-  }, [token, refresh]);
+  }, [token, refresh, activeFilter]);
+
+  // =============================
+  // Fetching budgets Data
+  // ============================
 
   useEffect(() => {
-    // getting all budgets for one user
     const getBudget = async () => {
       try {
         const res = await fetch(
           // `http://localhost:8080/users/${decodedToken._id}`
-          `http://${process.env.REACT_APP_URL}/budget`,
+          `http://${process.env.REACT_APP_URL}/budget?timeperiod=${activeFilter}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -69,16 +64,12 @@ export default function DataContextProvider(props) {
         Array.isArray(data)
           ? setBudgetData(data)
           : console.log("budget Data", data);
-        // setBudgetData(data);
-        // setLoading(false)
       } catch (error) {
-        /*         console.log(error);
-         */
-        // setLoading(false);
+        console.log(error);
       }
     };
     if (decodedToken) getBudget();
-  }, [decodedToken, refresh]);
+  }, [token, refresh, activeFilter]);
 
   // ==================================
   // Refactoring Data into categories
@@ -87,8 +78,7 @@ export default function DataContextProvider(props) {
     if (tranData.length > 0) {
       const refactorData = function () {
         const debitTrans = tranData.filter((trans) => trans.tran_sign === "DR");
-        /*         console.log("refactoring data / trandebit", debitTrans);
-         */ const groupedObjects = debitTrans.reduce((result, obj) => {
+        const groupedObjects = debitTrans.reduce((result, obj) => {
           const { category_name, tran_amount } = obj;
           if (!result[category_name]) {
             result[category_name] = {
@@ -120,12 +110,13 @@ export default function DataContextProvider(props) {
       if (token) {
         refactorData();
       }
+    } else {
+      setCategories([]);
+      setCategoriesObj({});
     }
-  }, [tranData, budgetData]);
+  }, [tranData, budgetData, activeFilter]);
 
-  /*   console.log("transaction data:", tranData);
-  console.log("Budget data:", budgetData); */
-  //   console.log("decoded token id:", decodedToken);
+  console.log(activeFilter, "active filter in Context");
 
   return (
     <DataContext.Provider
@@ -137,9 +128,12 @@ export default function DataContextProvider(props) {
         categories,
         setCategories,
         categoriesObj,
+        setCategoriesObj,
         decodedToken,
         refresh,
         setRefresh,
+        setActiveFilter,
+        activeFilter,
       }}
     >
       {props.children}

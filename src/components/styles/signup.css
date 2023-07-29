@@ -18,3 +18,18 @@
   transform: scale(1.1);
 }
 
+.signup{
+  width: 150px;
+  height: 35px;
+  background-color: var(--red);
+  border: none;
+  border-radius: 15rem;
+  color: white;
+  cursor: pointer;
+}
+.signup:hover{
+  background-color: white;
+  color:var(--red);
+  border: 1px solid var(--red);
+  transition: all ease 0.3s;
+}
