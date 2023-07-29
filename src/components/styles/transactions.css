@@ -1,12 +1,9 @@
 .transactions-container{
   padding: 1em;
 }
-.transaction-item {
-  flex: 1;
-  margin-right: 15px;
-  padding: 6px 0px 6px 0px;
-}
-.transactions-container .tabs-div {
+
+
+.tabs-div {
   border: 1px solid var(--red);
   display: flex;
   justify-content: space-evenly;
@@ -19,7 +16,7 @@
   background-color: white;
 }
 
-.transactions-container .tab {
+.tab {
   font-size: 14px;
   color: var(--red);
   font-weight: 700;
@@ -29,7 +26,7 @@
 }
 
 
-.transactions-container .activeTab {
+.activeTab {
   font-size: 14px;
   color: var(--red);
   font-weight: 700;
@@ -56,16 +53,29 @@
   color: white;
 }
 
-.transactions-container .transaction-div {
-  background-color: var(--gray-1);
-  border-radius: 32px;
-  margin-bottom: 15px;
+.transactionsAll{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
-.transactions-container .transaction-filter {
+.transaction-div {
   background-color: var(--gray-1);
   border-radius: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3em 1em;
 }
+.transaction-item{
+  margin: 0;
+}
+
+/* .transactions-container .transaction-filter {
+  background-color: var(--gray-1);
+  border-radius: 32px;
+} */
 
 .transactions-container
   .MuiInputBase-formControl
@@ -73,12 +83,13 @@
   padding: 1rem;
 }
 
-.transactions-container .transaction-filter label {
+/* .transactions-container .transaction-filter label {
   display: flex;
   align-items: center;
   padding: 0;
   margin: 0;
-}
+} */
+
 /* By assigning a flexible width to each element (amount, category, date), and adding a margin to the right side, the elements will align consistently even if the content length varies.
   
   Make sure to update the CSS file path in the import statement according to your project structure.

@@ -3,6 +3,7 @@ import { DataContext } from "../context/DataContext";
 import { ThemeContext } from "../context/ThemeContext";
 import { Container } from "@mui/material";
 import "./styles/reports.css";
+import FilterBar from "./FilterBar";
 
 //importing SVG -------------------
 import { ReactComponent as IconAddNew } from "./svgCategories/add-new.svg";
@@ -49,6 +50,8 @@ export default function Reports() {
   };
   return (
     <div className="General">
+      <FilterBar />
+
       <div className="dash-topSpending">
         {categories?.map((category) => {
           const IconComponent = categoryIcons[category.name]

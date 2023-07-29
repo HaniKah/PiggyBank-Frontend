@@ -2,11 +2,10 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
+
 import LinearProgress from "@mui/material/LinearProgress";
 import { DataContext } from "../context/DataContext"; //importing datacontext
-import Typography from "@mui/material/Typography";
+
 import AddIcon from "@mui/icons-material/Add";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
@@ -15,6 +14,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FilterBar from "./FilterBar";
 
 import "./styles/budget.css";
 
@@ -123,6 +123,8 @@ export default function Budget() {
 
   return (
     <div className="General">
+      <FilterBar />
+
       <div className="budget-container">
         {dialogOpen ? (
           <DialogConfirm
@@ -270,29 +272,16 @@ export default function Budget() {
                       (c) => c.toUpperCase()
                     );
                     return (
-                      <div className="transaction-div" key={element._id}>
-                        <Typography
-                          variant="p"
-                          component="p"
-                          className="transaction-item"
-                          sx={{ fontWeight: "bold" }}
-                        >
+                      <div className="budget-transaction-div" key={element._id}>
+                        <p className="budget-transaction-info">
                           {USDollar.format(element.tran_amount)}
-                        </Typography>
-                        <Typography
-                          variant="p"
-                          component="p"
-                          className="transaction-item"
-                        >
+                        </p>
+                        <p className="budget-transaction-info">
                           {capitalizedDesc}
-                        </Typography>
-                        <Typography
-                          variant="p"
-                          component="p"
-                          className="transaction-item"
-                        >
+                        </p>
+                        <p className="budget-transaction-info">
                           {newLocalDate}
-                        </Typography>
+                        </p>
                       </div>
                     );
                   })}

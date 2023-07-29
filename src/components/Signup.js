@@ -17,6 +17,7 @@ import { MenuItem } from "@mui/material";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
+import loadingSpinner from "./svgCategories/loadingSpinner.gif";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -81,17 +82,11 @@ export default function Signup() {
 
   return (
     <Container maxWidth="sm">
-      <Cornerright className="cornerright" />
       {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "20px",
-          }}
-        >
-          <CircularProgress sx={{ color: "#b9b9b9" }} />
-        </Box>
+        <div className="spinner-div">
+          <img className="spinner" src={loadingSpinner} alt="spinner" />
+          <h5 className="loading-txt">Loading ...</h5>
+        </div>
       ) : (
         <Box
           sx={{
@@ -105,6 +100,11 @@ export default function Signup() {
             paddingTop: "40px",
           }}
         >
+          <div className="logo-container">
+            <h1 className="logo-title-login">
+              Piggy<span className="bank">Bank</span>
+            </h1>
+          </div>
           <FormControl fullWidth className="signup-container">
             <TextField
               id="firstnameinput"
@@ -216,33 +216,18 @@ export default function Signup() {
                 padding: "30px",
               }}
             >
-              <CustomButton
-                sx={{
-                  ":hover": { bgcolor: "#C42B0A" },
-                  borderRadius: "31px",
-                  background: "#c80048",
-                  width: "150px",
-                  height: "50px",
-                  // margin: "20px",
-                  color: "white",
-                  fontSize: "16px",
-                  padding: "5px 80px",
-                }}
-                onClick={handleSubmit}
-                className="signup"
-              >
+              <button onClick={handleSubmit} className="signup">
                 Register
-              </CustomButton>
+              </button>
               <p> Already have an account?</p>
               <NavLink to="/login" className="backtologin">
                 Login here
               </NavLink>
-              {error && <div className="error">{error}</div>}
+              {error && <div className="error">⚠ {error}</div>}
             </Box>
           </FormControl>
         </Box>
       )}
-      <Cornerleft className="cornerleft" />
     </Container>
   );
 }

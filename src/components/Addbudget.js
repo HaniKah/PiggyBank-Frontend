@@ -14,6 +14,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -77,7 +78,7 @@ export default function Addbudget() {
             body: JSON.stringify({
               category_name: category,
               budget_description: description,
-              budget_date: date,
+              budget_date: date.$d,
               limit_amount: amount,
               user: "",
             }),
@@ -104,6 +105,7 @@ export default function Addbudget() {
       }
     }
   };
+  console.log("asdasdasdasdadassaasd", date);
 
   return (
     <Container
@@ -171,7 +173,8 @@ export default function Addbudget() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   disableFuture
-                  label="Date"
+                  label={"pick a month"}
+                  views={["month", "year"]}
                   className="background_grey"
                   // inputFormat="DD/MM/YYYY"
                   value={date}

@@ -25,28 +25,6 @@
   /* use these predefined colors by adding .. var()
   for example color : var(--red) */
 }
-.dark{
-  --red: #c80048;
-  --blue: #453f78;
-
-  --white-txt:rgb(0, 0, 0);
-  --black-txt:rgb(255, 255, 255);
-
-  --gray-0: #f1f1f1;
-  --gray-1: #e9e9e9;
-  --gray-2: #d9d9d9;
-  --gray-3: #b9b9b9;
-  --gray-4: #8b8b8b;
-
-  --header: linear-gradient(#c80048, #961c48);
-  --bg-main: linear-gradient(#7F173C, #1C060E);
-  --bg-board: rgba(241, 241, 241, 0.856);
-
-
-  --black: rgb(48, 48, 48);
-  --white:white;
-}
-
 
 .App {
 
