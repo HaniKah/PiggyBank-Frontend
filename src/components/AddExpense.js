@@ -48,24 +48,21 @@ export default function AddExpense() {
     } else {
       setIsLoading(true);
       try {
-        const res = await fetch(
-          `http://${process.env.REACT_APP_URL}/transaction/`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              category_name: category,
-              tran_description: description,
-              tran_amount: amount,
-              tran_sign: "DR", //DR (expense) or CR(income)
-              tran_currency: "US",
-              tran_date: date,
-            }),
-          }
-        );
+        const res = await fetch(`${process.env.REACT_APP_URL}/transaction/`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            category_name: category,
+            tran_description: description,
+            tran_amount: amount,
+            tran_sign: "DR", //DR (expense) or CR(income)
+            tran_currency: "US",
+            tran_date: date,
+          }),
+        });
         setIsLoading(false);
         setCategory("");
         setRecurrence("");

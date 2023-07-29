@@ -72,7 +72,7 @@ export default function Transactions() {
     try {
       console.log(id);
       const response = await fetch(
-        `http://${process.env.REACT_APP_URL}/transaction/${id}`,
+        `${process.env.REACT_APP_URL}/transaction/${id}`,
 
         {
           method: "DELETE",

@@ -55,7 +55,7 @@ export default function Addbudget() {
       setIsLoading(true);
       try {
         //Get existing budgets
-        const res = await fetch(`http://${process.env.REACT_APP_URL}/budget`, {
+        const res = await fetch(`${process.env.REACT_APP_URL}/budget`, {
           method: "GET", // Fetch the current data first
           headers: {
             Authorization: `Bearer ${token}`,
@@ -67,23 +67,20 @@ export default function Addbudget() {
 
         // Append the new object to the existing array
 
-        const resPut = await fetch(
-          `http://${process.env.REACT_APP_URL}/budget`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              category_name: category,
-              budget_description: description,
-              budget_date: date.$d,
-              limit_amount: amount,
-              user: "",
-            }),
-          }
-        );
+        const resPut = await fetch(`${process.env.REACT_APP_URL}/budget`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            category_name: category,
+            budget_description: description,
+            budget_date: date.$d,
+            limit_amount: amount,
+            user: "",
+          }),
+        });
         setIsLoading(false);
         setCategory("");
         setDate(null);
@@ -105,7 +102,6 @@ export default function Addbudget() {
       }
     }
   };
-  console.log("asdasdasdasdadassaasd", date);
 
   return (
     <Container

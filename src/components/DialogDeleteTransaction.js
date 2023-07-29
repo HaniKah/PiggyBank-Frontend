@@ -29,7 +29,7 @@ export default function DialogConfirm({
     try {
       console.log(tranDeleteId);
       const response = await fetch(
-        `http://${process.env.REACT_APP_URL}/transaction/${tranDeleteId}`,
+        `${process.env.REACT_APP_URL}/transaction/${tranDeleteId}`,
 
         {
           method: "DELETE",
