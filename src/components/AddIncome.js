@@ -52,7 +52,7 @@ export default function AddIncome() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://${process.env.REACT_APP_URL}/transaction`,
+          `${process.env.REACT_APP_URL}/transaction`,
           {
             method: "POST",
             headers: {

@@ -4,7 +4,6 @@ import AddExpense from "./components/AddExpense";
 import AddIncome from "./components/AddIncome";
 import Budget from "./components/Budget";
 import Dashboard from "./components/Dashboard";
-import Landingpage from "./components/Landingpage";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Reports from "./components/Reports";
