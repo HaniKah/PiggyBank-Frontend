@@ -23,7 +23,7 @@ export default function DataContextProvider(props) {
     const getData = async function () {
       try {
         const res = await fetch(
-          `http://${process.env.REACT_APP_URL}/transaction?timeperiod=${activeFilter}`,
+          `${process.env.REACT_APP_URL}/transaction?timeperiod=${activeFilter}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -48,11 +48,13 @@ export default function DataContextProvider(props) {
   // ============================
 
   useEffect(() => {
+    const link = `${process.env.REACT_APP_URL}/budget?timeperiod=${activeFilter}`;
+    console.log(link);
     const getBudget = async () => {
       try {
         const res = await fetch(
           // `http://localhost:8080/users/${decodedToken._id}`
-          `http://${process.env.REACT_APP_URL}/budget?timeperiod=${activeFilter}`,
+          `${process.env.REACT_APP_URL}/budget?timeperiod=${activeFilter}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -115,8 +117,6 @@ export default function DataContextProvider(props) {
       setCategoriesObj({});
     }
   }, [tranData, budgetData, activeFilter]);
-
-  console.log(activeFilter, "active filter in Context");
 
   return (
     <DataContext.Provider

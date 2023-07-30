@@ -53,7 +53,7 @@ export default function Scan() {
       formData.append("picture", image, image.name);
 
       const res = await axios.post(
-        "https://piggybank-api.onrender.com/api/upload",
+        "https://piggybank-api-utda.onrender.com/api/upload",
         formData
       );
 
