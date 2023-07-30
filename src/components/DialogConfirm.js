@@ -27,8 +27,9 @@ export default function DialogConfirm({
     setIsLoading(true);
     try {
       //Get existing budgets
+
       const res = await fetch(
-        `http://${process.env.REACT_APP_URL}/budget/${budgetDeleteId}`,
+        `${process.env.REACT_APP_URL}/budget/${budgetDeleteId}`,
         {
           method: "DELETE", // Fetch the current data first
           headers: {

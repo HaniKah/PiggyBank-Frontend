@@ -37,21 +37,17 @@ export default function Signup() {
     setError("");
     setIsLoading(true);
 
-    const response = await fetch(
-      `http://${process.env.REACT_APP_URL}/users/signup`,
-      // `${process.env.REACT_APP_BACKEND_URL}/users/signup`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          password,
-          country_code,
-          first_name,
-          last_name,
-        }),
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_URL}/users/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        password,
+        country_code,
+        first_name,
+        last_name,
+      }),
+    });
 
     const data = await response.json();
 

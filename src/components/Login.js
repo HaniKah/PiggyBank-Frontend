@@ -36,8 +36,8 @@ export default function Login() {
     // console.log("login URL:", url)
 
     const response = await fetch(
-      `http://${process.env.REACT_APP_URL}/users/login`,
-      // url,
+      `${process.env.REACT_APP_URL}/users/login`,
+
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
