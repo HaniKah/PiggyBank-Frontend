@@ -151,17 +151,12 @@ export default function Transactions() {
         {transaction === "expenses" && (
           <div>
             <h5 style={{ color: styling.txtColor }}>Spent</h5>
-
+            <p className="no-info-yet">
+              {tranData.length
+                ? null
+                : "You have not added any transactions yet."}
+            </p>
             {tranData
-              .filter((element) => {
-                const tran_date_timestamp = new Date(
-                  element.tran_date
-                ).getTime();
-                return (
-                  tran_date_timestamp <= endDate &&
-                  tran_date_timestamp >= startDate
-                );
-              })
               .filter((element) => element.tran_sign === "DR")
               .sort((a, b) => new Date(b.tran_date) - new Date(a.tran_date))
               .map((element) => {
@@ -208,17 +203,12 @@ export default function Transactions() {
         {transaction === "income" && (
           <div>
             <h5 style={{ color: styling.txtColor }}>Earned</h5>
-
+            <p className="no-info-yet">
+              {tranData.length
+                ? null
+                : "You have not added any transactions yet."}
+            </p>
             {tranData
-              .filter((element) => {
-                const tran_date_timestamp = new Date(
-                  element.tran_date
-                ).getTime();
-                return (
-                  tran_date_timestamp <= endDate &&
-                  tran_date_timestamp >= startDate
-                );
-              })
               .filter((element) => element.tran_sign === "CR")
               .sort((a, b) => new Date(b.tran_date) - new Date(a.tran_date))
               .map((element) => {

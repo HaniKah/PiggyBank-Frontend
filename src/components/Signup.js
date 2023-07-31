@@ -18,6 +18,7 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
 import loadingSpinner from "./svgCategories/loadingSpinner.gif";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -79,10 +80,7 @@ export default function Signup() {
   return (
     <Container maxWidth="sm">
       {isLoading ? (
-        <div className="spinner-div">
-          <img className="spinner" src={loadingSpinner} alt="spinner" />
-          <h5 className="loading-txt">Loading ...</h5>
-        </div>
+        <LoadingSpinner />
       ) : (
         <Box
           sx={{
