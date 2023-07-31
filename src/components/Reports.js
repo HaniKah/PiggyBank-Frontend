@@ -51,6 +51,10 @@ export default function Reports() {
   return (
     <div className="General">
       <FilterBar />
+      <h5>Top Spendings</h5>
+      <p className="no-info-yet">
+        {categories.length ? null : "You have not added any spendings yet."}
+      </p>
 
       <div className="dash-topSpending">
         {categories?.map((category) => {

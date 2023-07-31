@@ -136,7 +136,9 @@ export default function Budget() {
           />
         ) : null}
 
-        {budgetData.length ? null : "You have not added a Budget Limit yet."}
+        <p className="no-info-yet">
+          {budgetData.length ? null : "You have not added a Budget Limit yet."}
+        </p>
 
         {budgetData?.map((element) => {
           let spentBudgetBar = 0;

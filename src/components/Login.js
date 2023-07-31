@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import loadingSpinner from "./svgCategories/loadingSpinner.gif";
 import { ReactComponent as Cornerleft } from "./svgCategories/cornerleft.svg";
 import { ReactComponent as Cornerright } from "./svgCategories/cornerright.svg";
 
@@ -14,6 +13,7 @@ import { TextField } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -28,12 +28,6 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-
-    console.log(`Email:${email},Password:${password}`);
-
-    // const url = `${process.env.REACT_APP_BACKEND_URL}/users/login`
-
-    // console.log("login URL:", url)
 
     const response = await fetch(
       `${process.env.REACT_APP_URL}/users/login`,
@@ -73,10 +67,7 @@ export default function Login() {
   return (
     <Container maxWidth="sm">
       {isLoading ? (
-        <div className="spinner-div">
-          <img className="spinner" src={loadingSpinner} alt="spinner" />
-          <h5 className="loading-txt">Loading ...</h5>
-        </div>
+        <LoadingSpinner />
       ) : (
         <Box
           sx={{

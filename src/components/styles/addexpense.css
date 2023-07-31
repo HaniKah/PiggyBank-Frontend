@@ -1,10 +1,8 @@
-
 .css-cuefkz-MuiContainer-root {
   background-color: white;
   text-align: center;
   max-width: 600px;
   min-height: 100vh;
-  /* border: solid 2px green; */
   margin: 0 auto;
   position: relative;
 }
@@ -21,6 +19,11 @@
   border-radius: 31px;
 }
 
-.addexp_box .background_grey {
-  background-color: var(--gray-1);
+.add-tran-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 2em 0;
 }

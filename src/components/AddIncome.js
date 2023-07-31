@@ -25,6 +25,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { styled } from "@mui/system";
 import { useContext } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function AddIncome() {
   const [category_name, setCatgeroy] = useState("");
@@ -125,17 +126,9 @@ export default function AddIncome() {
       }}
     >
       {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <CircularProgress />
-        </Box>
+        <LoadingSpinner />
       ) : (
-        <Box sx={{ borderRadius: "20px" }} className="income_container">
+        <Box sx={{ borderRadius: "20px" }} className="add-tran-form">
           <FormControl fullWidth>
             <InputLabel id="category-label">Category</InputLabel>
 
@@ -240,9 +233,13 @@ export default function AddIncome() {
               sx={{ borderRadius: "31px", fontSize: "16px" }}
             ></OutlinedInput>
           </FormControl>
-          {/* <CustomButton
+          <CustomButton
             sx={{
-              ":hover": { bgcolor: "#C42B0A" },
+              ":hover": {
+                bgcolor: "white",
+                color: "var(--red)",
+                border: "1px solid var(--red)",
+              },
               borderRadius: "31px",
               background: "#c80048",
               width: "150px",
@@ -255,8 +252,8 @@ export default function AddIncome() {
             onClick={handleAddIncomesChange}
           >
             ADD
-          </CustomButton> */}
-          <Button
+          </CustomButton>
+          {/* <Button
             variant="outlined"
             onClick={handleAddIncomesChange}
             sx={{
@@ -271,7 +268,7 @@ export default function AddIncome() {
             }}
           >
             ADD
-          </Button>
+          </Button> */}
           <Box sx={{ mt: 1 }}>{alert}</Box>
         </Box>
       )}

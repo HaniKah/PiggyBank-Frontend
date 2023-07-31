@@ -1,9 +1,13 @@
 .budget_container {
+  display: flex;
   text-align: left;
   max-width: 320px;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+}
+.no-info-yet {
+  text-align: center;
 }
 .budget_category,
 .budget_date,
@@ -149,67 +153,61 @@
     padding: 10px;
   }
 }
-.budget-wrapper-test{
- display: flex;
- flex-direction: column;
- width:90%;
+.budget-wrapper-test {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
 }
 
-.budget-header{
+.budget-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1em;
   margin-bottom: 2em;
 }
-.budget-text{
+.budget-text {
   flex: 1;
 }
 
-.transaction-div{
+.transaction-div {
   display: flex;
   justify-content: space-between;
   padding: 0 1em;
   background-color: var(--gray-0);
   margin: 0.5em 0;
   border-radius: 5em;
-
 }
 
-
-
-
-.speedDial-wrapper{
+.speedDial-wrapper {
   position: fixed;
   z-index: 5;
   max-width: 450px;
   margin: auto 0;
   width: 100%;
   bottom: 100px;
-
 }
 
-.speedDial{
-position: absolute;
-right: 35px;
-bottom:10px
+.speedDial {
+  position: absolute;
+  right: 35px;
+  bottom: 10px;
 }
 
-.budget-container{
+.budget-container {
   display: flex;
   flex-direction: column;
   gap: 1em;
   width: 100%;
 }
 
-.budget-transaction-div{
+.budget-transaction-div {
   background-color: var(--gray-1);
   display: flex;
   justify-content: space-between;
   padding: 0.3em 1em;
   border-radius: 5rem;
-
 }
-.budget-transaction-info{
+.budget-transaction-info {
   margin: 0;
 }
