@@ -118,7 +118,7 @@ export default function Navbar() {
   return (
     <div className="navbar-container">
       <div onClick={handleClick2} className="navbar-scan">
-        <Scan />
+        <Scan style={{ color: "white" }} />
       </div>
       <h4 className="navbar-title">{currentPage}</h4>
 
