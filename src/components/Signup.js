@@ -205,11 +205,7 @@ export default function Signup() {
                 },
               }}
             />
-            <Box
-              sx={{
-                padding: "30px",
-              }}
-            >
+            <div className="submit-div">
               <button onClick={handleSubmit} className="signup">
                 Register
               </button>
@@ -218,7 +214,7 @@ export default function Signup() {
                 Login here
               </NavLink>
               {error && <div className="error">⚠ {error}</div>}
-            </Box>
+            </div>
           </FormControl>
         </Box>
       )}
