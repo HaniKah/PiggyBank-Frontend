@@ -2,29 +2,26 @@
   display: flex;
   flex-direction: column;
   gap: 1.3em;
-
 }
-.dash-progress{
+.dash-progress {
   border: solid 1px var(--gray-4);
   padding: 1.5em;
   border-radius: 1em;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-    width: 100%;
-    background-color: white;
-
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  background-color: white;
 }
 
-.dash-progress:hover{
+.dash-progress:hover {
   transform: scale(1.02);
-  transition: all 0.3s 
+  transition: all 0.3s;
 }
-
 
 /* =======================================
 Filters
 ===================================== */
 
-.direct-filter{
+.direct-filter {
   display: flex;
   gap: 15px;
   align-items: center;
@@ -37,33 +34,23 @@ Filters
   -webkit-overflow-scrolling: touch;
   width: 100%;
   margin-bottom: 15px;
-
-
 }
-
 
 .activemonth {
   font-weight: 700;
   text-decoration: underline;
   align-self: center;
-}
-
-
-.direct-filter::-webkit-scrollbar {
-display: none;
-}
-
-
-
-
-.month{
-  cursor: pointer;
   margin: 0;
 }
 
+.direct-filter::-webkit-scrollbar {
+  display: none;
+}
 
-
-
+.month {
+  cursor: pointer;
+  margin: 0;
+}
 
 /* 
 ================0===========
@@ -92,14 +79,13 @@ MUI styles
   border-radius: 5em;
 }
 
-
 .dash-h2 {
   text-align: left;
   color: var(--red);
   margin-top: 0.5em;
 }
 
-.dash-balance{
+.dash-balance {
   text-align: left;
   color: var(--black);
   font-size: 25px;
@@ -107,15 +93,12 @@ MUI styles
   margin-bottom: 5px;
   padding-bottom: 5px;
   border-bottom: 0.5px rgb(182, 182, 182) dashed;
-
 }
-.current-balance{
+.current-balance {
   text-align: left;
   color: var(--black);
   font-size: 15px;
   margin: 0;
-
-
 }
 .dash-expected {
   text-align: left;
@@ -157,7 +140,7 @@ MUI styles
   z-index: 2;
   margin: 0;
   font-size: 10px;
-  color:var(--black-txt);
+  color: var(--black-txt);
 }
 .progress-right-card {
   position: absolute;
@@ -168,16 +151,13 @@ MUI styles
   font-size: 10px;
   color: var(--black-txt);
 }
-.spent-title{
+.spent-title {
   color: var(--black-txt);
   text-align: left;
   margin-bottom: 3px;
   margin-left: 0.5em;
   font-size: 15px;
 }
-
-
-
 
 /* 
 ================0===========
@@ -192,14 +172,14 @@ Top spending
   text-align: left;
 }
 .dash-icon-title {
-scale: 1.3;
-margin-left: 5px;
+  scale: 1.3;
+  margin-left: 5px;
 }
 /* ===========================
 dash budgets
 ========================= */
-.dash-budget-wrapper{
-margin-left: 0.5em;
+.dash-budget-wrapper {
+  margin-left: 0.5em;
 }
 
 .dash-budget-title {
@@ -212,7 +192,6 @@ margin-left: 0.5em;
   color: var(--gray-4);
   font-size: 15px;
   margin: 0;
-
 }
 .dash-budget {
   display: flex;
@@ -225,7 +204,6 @@ margin-left: 0.5em;
   width: 50px;
   height: 50px;
 }
-
 
 /* .dash-filtering{
   border: solid 1px var(--gray-3);
@@ -242,15 +220,10 @@ margin-left: 0.5em;
   border-radius: 1em;
 }
 
-.optionFilter{
+.optionFilter {
   padding: 0px;
   margin: 0;
 }
-
-
-
-
-
 
 /* =======================
 Swiper
@@ -263,7 +236,7 @@ Swiper
 
   width: 90%;
   padding-bottom: 1em;
-  border-radius:15px ;
+  border-radius: 15px;
 }
 .swiper-slide {
   box-sizing: border-box;
@@ -273,10 +246,7 @@ Swiper
   /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25); */
   border-radius: 15px;
   padding: 1em;
-
-
 }
 .swiper-scrollbar {
   width: 50px;
-
 }
