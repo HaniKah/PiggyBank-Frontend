@@ -47,4 +47,6 @@ Deploy: https://piggybanktracker.netlify.app
 
 After cloning project to your local machine, dont forget to run:
 
+'npm install' to get the all node_modules installed
+
 
