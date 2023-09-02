@@ -168,7 +168,6 @@ export default function Addbudget() {
             <FormControl fullWidth sx={{ mb: 4 }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  disableFuture
                   label={"pick a month"}
                   views={["month", "year"]}
                   className="background_grey"
