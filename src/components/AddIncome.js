@@ -48,7 +48,11 @@ export default function AddIncome() {
       tran_description === "" ||
       tran_amount === ""
     ) {
-      setAlert(<Alert severity="warning">Please fill all the fields !</Alert>);
+      setAlert(
+        <Alert severity="warning" sx={{ fontSize: "16px" }}>
+          Please fill all the fields !
+        </Alert>
+      );
     } else {
       setIsLoading(true);
       try {
@@ -71,21 +75,25 @@ export default function AddIncome() {
             }),
           }
         );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error("Failed to add income");
-        }
         setIsLoading(false);
         setCatgeroy("");
         setDate(null);
         setDescription("");
         setAmount("");
-        setAlert(<Alert severity="success">Your income has been saved</Alert>);
+        setAlert(
+          <Alert severity="success" sx={{ fontSize: "16px" }}>
+            Your income has been saved
+          </Alert>
+        );
         setRefresh(!refresh);
       } catch (error) {
-        console.log(error);
+        setIsLoading(false);
+        setAlert(
+          <Alert severity="error" sx={{ fontSize: "16px" }}>
+            Transaction was not added, please try again later
+          </Alert>
+        );
+        console.log("Here is the Error with more Info:", error);
       }
     }
   };

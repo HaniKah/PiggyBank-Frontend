@@ -1,0 +1,28 @@
+.spinner-div {
+  background: var(--bg-main);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 450px;
+  width: 100vw;
+  gap: 1em;
+}
+.spinner {
+  width: 30%;
+  filter: saturate(0) brightness(100);
+}
+
+.loading-txt {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: white;
+  margin: 0;
+}

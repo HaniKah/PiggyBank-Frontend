@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
-import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -45,7 +44,11 @@ export default function AddExpense() {
       description === "" ||
       amount === ""
     ) {
-      setAlert(<Alert severity="warning">Please fill in all the fields</Alert>);
+      setAlert(
+        <Alert severity="warning" sx={{ fontSize: "16px" }}>
+          Please fill in all the fields
+        </Alert>
+      );
     } else {
       setIsLoading(true);
       try {
@@ -79,9 +82,8 @@ export default function AddExpense() {
       } catch (error) {
         setIsLoading(false);
         setAlert(
-          <Alert severity="error">
-            Couldn't post the transaction, take a look at the console for more
-            information about the error!
+          <Alert severity="error" sx={{ fontSize: "16px" }}>
+            Transaction was not added, please try again later
           </Alert>
         );
         console.log("Here is the Error with more Info:", error);
@@ -269,23 +271,6 @@ export default function AddExpense() {
           >
             ADD
           </CustomButton>
-          {/* <CustomButton
-              sx={{
-                ":hover": { bgcolor: "#C42B0A" },
-                borderRadius: "31px",
-                background: "#c80048",
-                width: "150px",
-                height: "50px",
-                margin: "20px",
-                color: "white",
-                fontSize: "16px",
-                padding: "5px 80px",
-              }}
-              onClick={handleSubmit}
-            >
-              ADD
-            </CustomButton> */}
-          {/* Alert Message */}
           <Box sx={{ mt: 1 }}>{alert}</Box>
         </div>
       )}
