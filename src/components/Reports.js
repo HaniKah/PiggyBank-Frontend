@@ -51,9 +51,13 @@ export default function Reports() {
   return (
     <div className="General">
       <FilterBar />
-      <h5>Top Spendings</h5>
+      <h5 style={{ color: styling.txtColor }}>Top Spendings</h5>
       <p className="no-info-yet">
-        {categories.length ? null : "You have not added any spendings yet."}
+        {categories.length ? null : (
+          <p style={{ color: styling.txtColor }}>
+            You have not added any spendings yet
+          </p>
+        )}
       </p>
 
       <div className="dash-topSpending">

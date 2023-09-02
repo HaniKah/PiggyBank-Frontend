@@ -65,27 +65,16 @@ export default function Login() {
   });
 
   return (
-    <Container maxWidth="sm">
+    <div>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "20px",
-            minHeight: "100vh",
-            paddingTop: "50px",
-          }}
-        >
-          <div className="logo-container">
-            <h1 className="logo-title-login">
-              Piggy<span className="bank">Bank</span>
-            </h1>
-          </div>
-          <FormControl fullWidth className="login-container">
+        <div className="login-container">
+          <h1 className="logo-title-login">
+            Piggy<span className="bank">Bank</span>
+          </h1>
+
+          <FormControl fullWidth className="formControl">
             <TextField
               id="login-emailinput"
               type="email"
@@ -94,6 +83,7 @@ export default function Login() {
               value={email}
               placeholder="Please enter your Email"
               sx={{
+                width: "50%",
                 borderRadius: "31px",
                 "& fieldset": {
                   borderRadius: "30px",
@@ -105,8 +95,7 @@ export default function Login() {
             >
               {" "}
             </TextField>
-          </FormControl>
-          <FormControl fullWidth>
+
             <TextField
               id="login-passwordinput"
               type="password"
@@ -115,6 +104,7 @@ export default function Login() {
               value={password}
               placeholder="Please enter your Password"
               sx={{
+                width: "50%",
                 borderRadius: "31px",
                 "& fieldset": {
                   borderRadius: "30px",
@@ -124,23 +114,18 @@ export default function Login() {
                 },
               }}
             ></TextField>
-            <Box
-              sx={{
-                padding: "20px",
-              }}
-            >
-              <button onClick={handleSubmit} className="login">
-                Sign in
-              </button>
-              <p>Don't have an account?</p>
-              <NavLink to="/signup" className="backtosignup">
-                Signup here
-              </NavLink>
-              {error && <div className="error">⚠ {error}</div>}
-            </Box>
+
+            <button onClick={handleSubmit} className="login">
+              Sign in
+            </button>
           </FormControl>
-        </Box>
+          <p>Don't have an account?</p>
+          <NavLink to="/signup" className="backtosignup">
+            Signup here
+          </NavLink>
+          {error && <div className="error">⚠ {error}</div>}
+        </div>
       )}
-    </Container>
+    </div>
   );
 }

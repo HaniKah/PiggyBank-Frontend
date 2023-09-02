@@ -42,7 +42,7 @@
 .logo-title-login {
   color: var(--red);
   font-size: 35px;
-  margin: 0;
+  margin: 1em;
 }
 .error {
   margin: 1.5em;
