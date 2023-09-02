@@ -137,7 +137,11 @@ export default function Budget() {
         ) : null}
 
         <p className="no-info-yet">
-          {budgetData.length ? null : "You have not added a Budget Limit yet."}
+          {budgetData.length ? null : (
+            <p style={{ color: styling.txtColor }}>
+              You have not added a Budget Limit yet
+            </p>
+          )}
         </p>
 
         {budgetData?.map((element) => {

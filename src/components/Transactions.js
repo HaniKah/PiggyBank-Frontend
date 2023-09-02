@@ -152,9 +152,11 @@ export default function Transactions() {
           <div>
             <h5 style={{ color: styling.txtColor }}>Spent</h5>
             <p className="no-info-yet">
-              {tranData.length
-                ? null
-                : "You have not added any transactions yet."}
+              {tranData.length ? null : (
+                <p style={{ color: styling.txtColor }}>
+                  You have not added any transactions yet.
+                </p>
+              )}
             </p>
             {tranData
               .filter((element) => element.tran_sign === "DR")
