@@ -166,7 +166,6 @@ export default function AddIncome() {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["DateTimePicker"]}>
                 <DatePicker
-                  disableFuture
                   label="Date"
                   value={tran_date}
                   className="background_grey"

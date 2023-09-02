@@ -175,7 +175,6 @@ export default function AddExpense() {
           <FormControl fullWidth>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                disableFuture
                 label="Date"
                 className="background_grey"
                 value={date}
