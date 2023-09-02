@@ -1,9 +1,10 @@
-.budget_container {
-  text-align: left;
-  max-width: 320px;
-  margin: 0 auto;
+.addexp_box {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1.5em;
+  padding: 2em 0;
 }
 .budget_category,
 .budget_date,

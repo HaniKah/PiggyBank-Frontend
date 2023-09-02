@@ -12,18 +12,15 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
-import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import LoadingSpinner from "./LoadingSpinner";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./styles/addbudget.css";
-import axios from "axios"; //last
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
-import { border } from "@mui/system";
 import { ThemeContext } from "../context/ThemeContext";
 // import { useJwt } from "react-jwt";
 
@@ -50,7 +47,11 @@ export default function Addbudget() {
       description === "" ||
       amount === ""
     ) {
-      setAlert(<Alert severity="warning">Please fill in all the fields</Alert>);
+      setAlert(
+        <Alert severity="warning" sx={{ fontSize: "16px" }}>
+          Please fill in all the fields
+        </Alert>
+      );
     } else {
       setIsLoading(true);
       try {
@@ -87,13 +88,15 @@ export default function Addbudget() {
         setDescription("");
         setAmount("");
         setAlert(
-          <Alert severity="success">Your Budget Limit has been saved</Alert>
+          <Alert severity="success" sx={{ fontSize: "16px" }}>
+            Your Budget Limit has been saved
+          </Alert>
         );
         setRefresh(!refresh);
       } catch (error) {
         setIsLoading(false);
         setAlert(
-          <Alert severity="error">
+          <Alert severity="error" sx={{ fontSize: "16px" }}>
             Couldn't post the Budget Limit, take a look at the console for more
             information about the error!
           </Alert>
@@ -117,108 +120,54 @@ export default function Addbudget() {
       }}
     >
       {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <CircularProgress sx={{ mt: 2 }} />
-        </Box>
+        <LoadingSpinner />
       ) : (
         <Box sx={{ minWidth: 120, p: 2 }} className="addexp_box">
-          <form>
-            {/*Category */}
-            {/* <FormControl fullWidth> */}
-            <FormControl fullWidth sx={{ mb: 4 }}>
-              <InputLabel id="category-label">Category</InputLabel>
-              <Select
-                required
-                labelId="category-label"
-                id="category"
-                value={category}
-                label="Category"
-                className="background_grey"
-                onChange={(e) => setCategory(e.target.value)}
-                sx={{
-                  textAlign: "left",
-                  borderRadius: "31px",
-                  fontSize: "16px",
-                }}
-              >
-                <MenuItem value={"education"}>Education</MenuItem>
-                <MenuItem value={"communication"}>Communication</MenuItem>
-                <MenuItem value={"bills"}>Bills</MenuItem>
-                <MenuItem value={"rent"}>Rent</MenuItem>
-                <MenuItem value={"medicine"}>Medicine</MenuItem>
-                <MenuItem value={"groceries"}>Groceries</MenuItem>
-                <MenuItem value={"eatingOut"}>Eating Out</MenuItem>
-                <MenuItem value={"entertainment"}>Entertainment</MenuItem>
-                <MenuItem value={"pets"}>Pets</MenuItem>
-                <MenuItem value={"repairs"}>Repairs</MenuItem>
-                <MenuItem value={"work"}>Work</MenuItem>
-                <MenuItem value={"insurance"}>Insurance</MenuItem>
-                <MenuItem value={"others"}>Others</MenuItem>
-              </Select>
-            </FormControl>
+          {/*Category */}
+          {/* <FormControl fullWidth> */}
+          <FormControl fullWidth>
+            <InputLabel id="category-label">Category</InputLabel>
+            <Select
+              required
+              labelId="category-label"
+              id="category"
+              value={category}
+              label="Category"
+              className="background_grey"
+              onChange={(e) => setCategory(e.target.value)}
+              sx={{
+                textAlign: "left",
+                borderRadius: "31px",
+                fontSize: "16px",
+              }}
+            >
+              <MenuItem value={"education"}>Education</MenuItem>
+              <MenuItem value={"communication"}>Communication</MenuItem>
+              <MenuItem value={"bills"}>Bills</MenuItem>
+              <MenuItem value={"rent"}>Rent</MenuItem>
+              <MenuItem value={"medicine"}>Medicine</MenuItem>
+              <MenuItem value={"groceries"}>Groceries</MenuItem>
+              <MenuItem value={"eatingOut"}>Eating Out</MenuItem>
+              <MenuItem value={"entertainment"}>Entertainment</MenuItem>
+              <MenuItem value={"pets"}>Pets</MenuItem>
+              <MenuItem value={"repairs"}>Repairs</MenuItem>
+              <MenuItem value={"work"}>Work</MenuItem>
+              <MenuItem value={"insurance"}>Insurance</MenuItem>
+              <MenuItem value={"others"}>Others</MenuItem>
+            </Select>
+          </FormControl>
 
-            {/*Date*/}
-            {/* <FormControl fullWidth> */}
-            <FormControl fullWidth sx={{ mb: 4 }}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label={"pick a month"}
-                  views={["month", "year"]}
-                  className="background_grey"
-                  // inputFormat="DD/MM/YYYY"
-                  value={date}
-                  onChange={(selectedDate) => setDate(selectedDate)}
-                  sx={{
-                    borderRadius: "31px",
-                    "& fieldset": {
-                      borderRadius: "30px",
-                    },
-                    "& .MuiInputBase-input": {
-                      fontSize: "16px", // Set the desired font size
-                    },
-                  }}
-                />
-              </LocalizationProvider>
-            </FormControl>
-
-            {/*Amount */}
-            {/* <FormControl fullWidth> */}
-            <FormControl fullWidth sx={{ marginBottom: "1.5em" }}>
-              <InputLabel htmlFor="outlined-adornment-amount">
-                Amount
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-amount"
-                type="number"
-                startAdornment={
-                  <InputAdornment position="start">€</InputAdornment>
-                }
-                label="Amount"
+          {/*Date*/}
+          {/* <FormControl fullWidth> */}
+          <FormControl fullWidth>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label={"pick a month"}
+                views={["month", "year"]}
                 className="background_grey"
-                onChange={(e) => setAmount(e.target.value)}
-                value={amount}
-                sx={{
-                  borderRadius: "31px",
-                  fontSize: "16px",
-                }}
-              />
-            </FormControl>
-            {/*Description */}
-            {/* <FormControl fullWidth> */}
-            <FormControl fullWidth sx={{ mb: 4 }}>
-              <TextField
-                id="outlined-basic"
-                label="Description"
-                className="background_grey"
-                variant="outlined"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                // inputFormat="DD/MM/YYYY"
+                value={date}
+                onChange={(selectedDate) => setDate(selectedDate)}
                 sx={{
                   borderRadius: "31px",
                   "& fieldset": {
@@ -229,25 +178,74 @@ export default function Addbudget() {
                   },
                 }}
               />
-            </FormControl>
-            {/* Submit Button */}
-            <Button
-              variant="outlined"
-              onClick={handleSubmit}
+            </LocalizationProvider>
+          </FormControl>
+
+          {/*Amount */}
+          {/* <FormControl fullWidth> */}
+          <FormControl fullWidth>
+            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-amount"
+              type="number"
+              startAdornment={
+                <InputAdornment position="start">€</InputAdornment>
+              }
+              label="Amount"
+              className="background_grey"
+              onChange={(e) => setAmount(e.target.value)}
+              value={amount}
               sx={{
-                ":hover": { bgcolor: "#453f78", color: "white" },
                 borderRadius: "31px",
-                width: "250px",
-                height: "50px",
-                margin: "10px",
                 fontSize: "16px",
-                padding: "5px 8px",
-                textDecoration: "none",
               }}
-            >
-              ADD
-            </Button>
-            {/* <Button
+            />
+          </FormControl>
+          {/*Description */}
+          {/* <FormControl fullWidth> */}
+          <FormControl fullWidth>
+            <TextField
+              id="outlined-basic"
+              label="Description"
+              className="background_grey"
+              variant="outlined"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              sx={{
+                borderRadius: "31px",
+                "& fieldset": {
+                  borderRadius: "30px",
+                },
+                "& .MuiInputBase-input": {
+                  fontSize: "16px", // Set the desired font size
+                },
+              }}
+            />
+          </FormControl>
+          {/* Submit Button */}
+          <Button
+            variant="outlined"
+            onClick={handleSubmit}
+            sx={{
+              ":hover": {
+                bgcolor: "white",
+                color: "var(--red)",
+                border: "1px solid var(--red)",
+              },
+              border: "1px solid var(--red)",
+              borderRadius: "31px",
+              background: "#c80048",
+              width: "150px",
+              height: "50px",
+              margin: "20px",
+              color: "white",
+              fontSize: "16px",
+              padding: "5px 80px",
+            }}
+          >
+            ADD
+          </Button>
+          {/* <Button
               sx={{
                 ":hover": {
                   bgcolor: "white",
@@ -266,23 +264,8 @@ export default function Addbudget() {
             >
               Add
             </Button> */}
-            {/* Alert Message */}
-            <Box sx={{ mt: 1 }}>
-              {/* {alert}  */}
-              {alert && (
-                <Alert
-                  severity="success"
-                  sx={{
-                    "& .MuiAlert-message": {
-                      fontSize: "14px", // Set the desired font size
-                    },
-                  }}
-                >
-                  {alert}
-                </Alert>
-              )}
-            </Box>
-          </form>
+          {/* Alert Message */}
+          <Box sx={{ mt: 1 }}>{alert}</Box>
         </Box>
       )}
     </Container>
