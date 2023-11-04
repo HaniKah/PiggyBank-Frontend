@@ -1,5 +1,4 @@
 const auth = `Token ${process.env.REACT_APP_MINDEE_API_KEY}`;
-console.log("MINDEE API KEY:", auth);
 
 // parseReceipt accepts a public url and returns parsed data in MINDEE format
 async function parseReceipt(imageURL) {

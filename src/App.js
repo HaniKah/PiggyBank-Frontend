@@ -23,7 +23,6 @@ import { ThemeContext } from "./context/ThemeContext";
 function App() {
   const { token, logout } = useContext(AuthContext);
   const { styling } = useContext(ThemeContext);
-  console.log("token:", token);
 
   return (
     <div className="App">
