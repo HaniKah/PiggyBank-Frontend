@@ -354,7 +354,7 @@ export default function Dashboard() {
             </div>
 
             <div
-              class="swiper-pagination"
+              className="swiper-pagination"
               sx={{
                 padding: "15px",
               }}
@@ -362,7 +362,7 @@ export default function Dashboard() {
 
             <div
               style={{ backgroundColor: styling.pagination }}
-              class="swiper-scrollbar"
+              className="swiper-scrollbar"
             ></div>
           </div>
         </div>

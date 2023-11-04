@@ -49,7 +49,7 @@ export default function DataContextProvider(props) {
 
   useEffect(() => {
     const link = `${process.env.REACT_APP_URL}/budget?timeperiod=${activeFilter}`;
-    console.log(link);
+
     const getBudget = async () => {
       try {
         const res = await fetch(
